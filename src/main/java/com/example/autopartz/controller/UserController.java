@@ -14,21 +14,14 @@ import java.util.List;
 @RequestMapping("/")
 public class UserController {
     private final UserService userService;
-    private final RepairShopReviewSummaryRepository repairShopReviewSummaryRepository;
-
     private final OrdersForUserRepository ordersForUserRepository;
     private final RepairsForUserRepository repairsForUserRepository;
     private final ReviewsForUserRepository reviewsForUserRepository;
-    public UserController(UserService userService, RepairShopReviewSummaryRepository repairShopReviewSummaryRepository, OrdersForUserRepository ordersForUserRepository, RepairsForUserRepository repairsForUserRepository, ReviewsForUserRepository reviewsForUserRepository) {
+    public UserController(UserService userService, OrdersForUserRepository ordersForUserRepository, RepairsForUserRepository repairsForUserRepository, ReviewsForUserRepository reviewsForUserRepository) {
         this.userService = userService;
-        this.repairShopReviewSummaryRepository = repairShopReviewSummaryRepository;
         this.ordersForUserRepository = ordersForUserRepository;
         this.repairsForUserRepository = repairsForUserRepository;
         this.reviewsForUserRepository = reviewsForUserRepository;
-    }
-    @GetMapping("reportTest")
-    public List<RepairShopReviewsSummary> getRepairShopReport(){
-        return repairShopReviewSummaryRepository.findAll();
     }
     @GetMapping("usersTest")
     public List<User> getAllUsers(){

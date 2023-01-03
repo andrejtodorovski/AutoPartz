@@ -1,0 +1,21 @@
+<div>
+  <main>
+    <h1>Информации за сервиси</h1>
+    <table>
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Number of reviews</th>
+        <th>Average rating</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="service : ${services}">
+        <td th:text="${service.getRsname()}"></td>
+        <td th:text="${service.getReviewcount()}"></td>
+        <td th:text="${service.getReviewaverage()}"></td>
+      </tr>
+      </tbody>
+    </table>
+  </main>
+</div>

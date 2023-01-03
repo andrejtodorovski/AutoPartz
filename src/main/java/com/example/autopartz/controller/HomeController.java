@@ -2,6 +2,7 @@ package com.example.autopartz.controller;
 
 import com.example.autopartz.model.User;
 import com.example.autopartz.repository.PartsForCarTypeAndCategoryRepository;
+import com.example.autopartz.repository.RepairShopReviewSummaryRepository;
 import com.example.autopartz.service.CarService;
 import com.example.autopartz.service.CategoryService;
 import com.example.autopartz.service.LoginService;
@@ -21,21 +22,34 @@ public class HomeController {
     private final PartsForCarTypeAndCategoryRepository partsForCarTypeAndCategoryRepository;
     private final CarService carService;
     private final CategoryService categoryService;
+    private final RepairShopReviewSummaryRepository repairShopReviewSummaryRepository;
 
-    public HomeController(LoginService loginService, PartService partService, PartsForCarTypeAndCategoryRepository partsForCarTypeAndCategoryRepository, CarService carService, CategoryService categoryService) {
+    public HomeController(LoginService loginService, PartService partService, PartsForCarTypeAndCategoryRepository partsForCarTypeAndCategoryRepository, CarService carService, CategoryService categoryService, RepairShopReviewSummaryRepository repairShopReviewSummaryRepository) {
         this.loginService = loginService;
         this.partService = partService;
         this.partsForCarTypeAndCategoryRepository = partsForCarTypeAndCategoryRepository;
         this.carService = carService;
         this.categoryService = categoryService;
+        this.repairShopReviewSummaryRepository = repairShopReviewSummaryRepository;
     }
 
     @GetMapping()
     public String getHomePage(Model model){
+        model.addAttribute("bodyContent","home");
+        return "master-template";
+    }
+    @GetMapping("/products")
+    public String getProducts(Model model){
         model.addAttribute("parts",partService.findAll());
         model.addAttribute("cars",carService.findAll());
         model.addAttribute("categories",categoryService.findAll());
-        model.addAttribute("bodyContent","homepage");
+        model.addAttribute("bodyContent","products");
+        return "master-template";
+    }
+    @GetMapping("/services")
+    public String getServices(Model model){
+        model.addAttribute("services",repairShopReviewSummaryRepository.findAll());
+        model.addAttribute("bodyContent","services");
         return "master-template";
     }
     @GetMapping("/filtered")
