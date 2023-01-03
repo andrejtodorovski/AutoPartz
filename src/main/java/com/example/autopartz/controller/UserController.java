@@ -15,15 +15,13 @@ import java.util.List;
 public class UserController {
     private final UserService userService;
     private final RepairShopReviewSummaryRepository repairShopReviewSummaryRepository;
-    private final PartsForCarTypeAndCategoryRepository partsForCarTypeAndCategoryRepository;
 
     private final OrdersForUserRepository ordersForUserRepository;
     private final RepairsForUserRepository repairsForUserRepository;
     private final ReviewsForUserRepository reviewsForUserRepository;
-    public UserController(UserService userService, RepairShopReviewSummaryRepository repairShopReviewSummaryRepository, PartsForCarTypeAndCategoryRepository partsForCarTypeAndCategoryRepository, OrdersForUserRepository ordersForUserRepository, RepairsForUserRepository repairsForUserRepository, ReviewsForUserRepository reviewsForUserRepository) {
+    public UserController(UserService userService, RepairShopReviewSummaryRepository repairShopReviewSummaryRepository, OrdersForUserRepository ordersForUserRepository, RepairsForUserRepository repairsForUserRepository, ReviewsForUserRepository reviewsForUserRepository) {
         this.userService = userService;
         this.repairShopReviewSummaryRepository = repairShopReviewSummaryRepository;
-        this.partsForCarTypeAndCategoryRepository = partsForCarTypeAndCategoryRepository;
         this.ordersForUserRepository = ordersForUserRepository;
         this.repairsForUserRepository = repairsForUserRepository;
         this.reviewsForUserRepository = reviewsForUserRepository;
@@ -36,23 +34,22 @@ public class UserController {
     public List<User> getAllUsers(){
         return userService.findAllUsers();
     }
-    @GetMapping("parts")
-    public List<PartsForCarTypeAndCategory> getPartsForCarTypeAndCategory(@RequestParam String cartype, @RequestParam String category){
-        return partsForCarTypeAndCategoryRepository.findAllByCartypeAndCategory(cartype,category);
-    }
     @GetMapping("orders/{id}")
     public String getOrdersForUser(@PathVariable Long id, Model model){
         model.addAttribute("userOrders",ordersForUserRepository.findAllByUserid(id));
-        return "ordersForUser";
+        model.addAttribute("bodyContent","ordersForUser");
+        return "master-template";
     }
     @GetMapping("repairs/{id}")
     public String getRepairsForUser(@PathVariable Long id,Model model){
         model.addAttribute("userRepairs",repairsForUserRepository.findAllByUserid(id));
-        return "repairsForUser";
+        model.addAttribute("bodyContent","repairsForUser");
+        return "master-template";
     }
     @GetMapping("reviews/{id}")
     public String getReviewsForUser(@PathVariable Long id, Model model){
         model.addAttribute("userReviews",reviewsForUserRepository.findAllByUserid(id));
-        return "reviewsForUser";
+        model.addAttribute("bodyContent","reviewsForUser");
+        return "master-template";
     }
 }

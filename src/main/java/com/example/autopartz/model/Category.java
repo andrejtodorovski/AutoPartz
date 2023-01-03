@@ -1,9 +1,6 @@
 package com.example.autopartz.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.Hibernate;
 
@@ -17,7 +14,8 @@ import java.util.Objects;
 public class Category {
     @Id
     Long ID_category;
-    String category_name;
+    @Column(name = "category_name")
+    String cname;
     @ManyToOne
     @JoinColumn(name = "id_parent_category")
     Category ID_parent_category;

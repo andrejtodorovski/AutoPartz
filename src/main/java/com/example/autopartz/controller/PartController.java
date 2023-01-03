@@ -28,13 +28,15 @@ public class PartController {
         Integer amount = priceService.findPriceForPart(temp).stream().findFirst().orElseThrow(RuntimeException::new).getAmount();
         model.addAttribute("part",temp);
         model.addAttribute("amount",amount);
-        return "partinfo";
+        model.addAttribute("bodyContent","partinfo");
+        return "master-template";
     }
     @GetMapping("/delivery/{id}")
     public String getDeliveryPage(@PathVariable Long id, Model model){
         model.addAttribute("repairShops",repairShopService.findAll());
         model.addAttribute("partId",id);
-        return "deliveryForPart";
+        model.addAttribute("bodyContent","deliveryForPart");
+        return "master-template";
     }
     @PostMapping("/repairshopdelivery")
     public void setRepairShopDelivery(@RequestParam String name, HttpServletResponse response){

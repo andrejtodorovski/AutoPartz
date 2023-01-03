@@ -1,0 +1,47 @@
+<header>
+  <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <div class="container">
+      <a class="navbar-brand" href="/">AutoPartz</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+              aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse justify-content-end" id="navbarsExampleDefault">
+        <ul class="navbar-nav m-auto">
+          <li class="nav-item m-auto">
+            <a class="nav-link active" href="/products">Продукти</a>
+          </li>
+          <li class="nav-item m-auto">
+            <a class="nav-link active" href="/services">Сервиси</a>
+          </li>
+        </ul>
+
+        <ul class="nav navbar-nav navbar-right">
+
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+<!--              <th:block th:if="${#request.getRemoteUser() != null}"-->
+<!--                        th:text="${#request.getRemoteUser()}"></th:block>-->
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="btn btn-success btn-sm ml-3" href="/register">
+              <i class="fa fa-shopping-cart"></i> Регистрирај се
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="btn btn-light btn-sm ml-3" href="/logout">
+              <i class="fa fa-shopping-cart"></i> Одјави се
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="btn btn-light btn-sm ml-3" href="/login">
+              <i class="fa fa-shopping-cart"></i> Најави се
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>

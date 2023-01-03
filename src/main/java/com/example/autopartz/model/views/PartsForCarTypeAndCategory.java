@@ -24,4 +24,5 @@ public class PartsForCarTypeAndCategory implements Serializable {
     String partname;
     String cartype;
     String category;
+    String pmname;
 }

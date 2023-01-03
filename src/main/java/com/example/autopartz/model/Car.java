@@ -17,7 +17,8 @@ public class Car {
     Long ID_car;
     Integer in_production_since;
     Integer in_production_till;
-    String car_type;
+    @Column(name = "car_type")
+    String cartype;
     @ManyToOne
     @JoinColumn(name = "id_car_manufacturer")
     CarManufacturer car_manufacturer;

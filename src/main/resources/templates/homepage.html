@@ -1,10 +1,4 @@
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
-      lang="en">
-<head>
-    <meta charset="utf-8"/>
-    <title>Почетна</title>
-</head>
-<body>
+<div>
 <header>
     <a th:href="${'/orders/4'}">Мои нарачки</a>
     <a th:href="${'/repairs/4'}">Мои поправки</a>
@@ -12,11 +6,25 @@
 </header>
 <main>
     <h1>Сите производи</h1>
+    <form th:action="@{/filtered}">
+        <label for="cartype"></label><select id="cartype" required name="cartype">
+            <option  th:each="car : ${cars}"
+                     th:text="${car.getCartype()}"
+                     th:value="${car.getCartype()}">
+            </option>
+        </select>
+        <label for="category"></label><select id="category" required name="category">
+            <option  th:each="cat : ${categories}"
+                     th:text="${cat.getCname()}"
+                     th:value="${cat.getCname()}">
+            </option>
+        </select>
+        <button type="submit">Филтрирај</button>
+    </form>
     <table>
         <thead>
         <tr>
             <th>Name</th>
-            <th>Description</th>
             <th>Manufacturer</th>
             <th>Details</th>
         </tr>
@@ -24,7 +32,6 @@
         <tbody>
         <tr th:each="part : ${parts}">
             <td th:text="${part.getName()}"></td>
-            <td th:text="${part.getDescription()}"></td>
             <td th:text="${part.getManufacturer().getName()}"></td>
             <td>
                 <form th:action="@{'/part/{id}' (id=${part.getId()}) }">
@@ -35,5 +42,4 @@
         </tbody>
     </table>
 </main>
-</body>
-</html>
+</div>

@@ -1,0 +1,26 @@
+<div>
+<h1>Резултат од филтерот</h1>
+<a th:href="${'/'}">Врати се на сите производи</a>
+
+<table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Manufacturer</th>
+        <th>Details</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="f : ${filtered}">
+        <td th:text="${f.getPartname()}"></td>
+        <td th:text="${f.getPmname()}"></td>
+        <td>
+            <form th:action="@{'/part/{id}' (id=${f.getPartid()}) }">
+                <button type="submit">Детали</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+</div>
