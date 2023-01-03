@@ -1,11 +1,10 @@
 package com.example.autopartz.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.Hibernate;
 
+import java.util.List;
 import java.util.Objects;
 
 @Getter
@@ -20,6 +19,12 @@ public class RepairShop {
     String rs_name;
     String rs_location;
     String rs_phone_number;
+    @ManyToMany
+    @JoinTable(name = "repair_shop_is_authorized_for_car_make", joinColumns =
+    @JoinColumn(name = "id_repair_shop"),
+            inverseJoinColumns = @JoinColumn(name = "id_car_manufacturer"))
+    @ToString.Exclude
+    List<CarManufacturer> carManufacturerList;
 
     @Override
     public boolean equals(Object o) {

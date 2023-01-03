@@ -1,10 +1,12 @@
 package com.example.autopartz.model;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.Hibernate;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -27,6 +29,18 @@ public class Part {
     inverseJoinColumns = @JoinColumn(name = "id_category"))
     @ToString.Exclude
     List<Category> categoryList;
+    @ManyToMany
+    @JoinTable(name = "part_is_in_stock_in_warehouse", joinColumns =
+    @JoinColumn(name = "id_part"),
+            inverseJoinColumns = @JoinColumn(name = "id_warehouse"))
+    @ToString.Exclude
+    List<Warehouse> warehouseList;
+    @ManyToMany
+    @JoinTable(name = "part_is_appropriate_for_car", joinColumns =
+    @JoinColumn(name = "id_part"),
+            inverseJoinColumns = @JoinColumn(name = "id_car"))
+    @ToString.Exclude
+    List<Car> carList;
 
     @Override
     public boolean equals(Object o) {

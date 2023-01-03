@@ -5,6 +5,7 @@ import lombok.*;
 import org.hibernate.Hibernate;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -21,6 +22,12 @@ public class Order {
     @JoinColumn(name = "id_user")
     @ManyToOne
     Client user;
+    @ManyToMany
+    @JoinTable(name = "order_contains_part", joinColumns =
+    @JoinColumn(name = "id_order"),
+            inverseJoinColumns = @JoinColumn(name = "id_part"))
+    @ToString.Exclude
+    List<Part> partList;
 
     @Override
     public boolean equals(Object o) {
