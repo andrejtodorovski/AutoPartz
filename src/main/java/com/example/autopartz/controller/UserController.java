@@ -1,12 +1,9 @@
 package com.example.autopartz.controller;
 
-import com.example.autopartz.model.RepairShopReviewsSummary;
-import com.example.autopartz.model.User;
-import com.example.autopartz.repository.RepairShopReviewSummaryRepository;
+import com.example.autopartz.model.*;
+import com.example.autopartz.repository.*;
 import com.example.autopartz.service.UserService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -14,18 +11,42 @@ import java.util.List;
 @RequestMapping("/")
 public class UserController {
     private final UserService userService;
-    private final RepairShopReviewSummaryRepository rspsr;
+    private final RepairShopReviewSummaryRepository repairShopReviewSummaryRepository;
+    private final PartsForCarTypeAndCategoryRepository partsForCarTypeAndCategoryRepository;
 
-    public UserController(UserService userService, RepairShopReviewSummaryRepository rspsr) {
+    private final OrdersForUserRepository ordersForUserRepository;
+    private final RepairsForUserRepository repairsForUserRepository;
+    private final ReviewsForUserRepository reviewsForUserRepository;
+    public UserController(UserService userService, RepairShopReviewSummaryRepository repairShopReviewSummaryRepository, PartsForCarTypeAndCategoryRepository partsForCarTypeAndCategoryRepository, OrdersForUserRepository ordersForUserRepository, RepairsForUserRepository repairsForUserRepository, ReviewsForUserRepository reviewsForUserRepository) {
         this.userService = userService;
-        this.rspsr = rspsr;
+        this.repairShopReviewSummaryRepository = repairShopReviewSummaryRepository;
+        this.partsForCarTypeAndCategoryRepository = partsForCarTypeAndCategoryRepository;
+        this.ordersForUserRepository = ordersForUserRepository;
+        this.repairsForUserRepository = repairsForUserRepository;
+        this.reviewsForUserRepository = reviewsForUserRepository;
     }
     @GetMapping("reportTest")
     public List<RepairShopReviewsSummary> getRepairShopReport(){
-        return rspsr.findAllByRsid(2L);
+        return repairShopReviewSummaryRepository.findAll();
     }
     @GetMapping("usersTest")
     public List<User> getAllUsers(){
         return userService.findAllUsers();
+    }
+    @GetMapping("parts")
+    public List<PartsForCarTypeAndCategory> getPartsForCarTypeAndCategory(@RequestParam String cartype, @RequestParam String category){
+        return partsForCarTypeAndCategoryRepository.findAllByCartypeAndCategory(cartype,category);
+    }
+    @GetMapping("orders/{id}")
+    public List<OrdersForUser> getOrdersForUser(@PathVariable Long id){
+        return ordersForUserRepository.findAllByUserid(id);
+    }
+    @GetMapping("repairs/{id}")
+    public List<RepairsForUser> getRepairsForUser(@PathVariable Long id){
+        return repairsForUserRepository.findAllByUserid(id);
+    }
+    @GetMapping("reviews/{id}")
+    public List<ReviewsForUser> getReviewsForUser(@PathVariable Long id){
+        return reviewsForUserRepository.findAllByUserid(id);
     }
 }

@@ -1,12 +1,11 @@
 package com.example.autopartz.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.Hibernate;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Getter
@@ -22,6 +21,12 @@ public class Part {
     @ManyToOne
     @JoinColumn(name = "id_part_manufacturer")
     PartManufacturer partManufacturer;
+    @ManyToMany
+    @JoinTable(name = "part_is_from_category", joinColumns =
+    @JoinColumn(name = "id_part"),
+    inverseJoinColumns = @JoinColumn(name = "id_category"))
+    @ToString.Exclude
+    List<Category> categoryList;
 
     @Override
     public boolean equals(Object o) {
