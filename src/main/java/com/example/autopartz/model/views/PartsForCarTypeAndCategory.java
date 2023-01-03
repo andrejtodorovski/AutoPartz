@@ -1,4 +1,4 @@
-package com.example.autopartz.model;
+package com.example.autopartz.model.views;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Детали</title>
+</head>
+<body>
+<p th:text="${part.getName()}"></p>
+<p th:text="${part.getDescription()}"></p>
+<p th:text="${part.getManufacturer().getName()}"></p>
+<p><span th:text="${amount}"></span><span> денари</span></p>
+<form th:action="@{'/part/delivery/{id}' (id=${part.getId()}) }">
+    <label>
+        <input type="number" required min="1" placeholder="Количина"/>
+    </label>
+    <button type="submit">Купи</button>
+</form>
+</body>
+</html>

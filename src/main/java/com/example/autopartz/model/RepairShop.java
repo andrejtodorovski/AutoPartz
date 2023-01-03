@@ -15,10 +15,14 @@ import java.util.Objects;
 @Table(name = "repair_shop")
 public class RepairShop {
     @Id
-    Long ID_repair_shop;
-    String rs_name;
-    String rs_location;
-    String rs_phone_number;
+    @Column(name = "ID_repair_shop")
+    Long id;
+    @Column(name = "rs_name")
+    String name;
+    @Column(name = "rs_location")
+    String location;
+    @Column(name = "rs_phone_number")
+    String number;
     @ManyToMany
     @JoinTable(name = "repair_shop_is_authorized_for_car_make", joinColumns =
     @JoinColumn(name = "id_repair_shop"),
@@ -31,7 +35,7 @@ public class RepairShop {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
         RepairShop that = (RepairShop) o;
-        return ID_repair_shop != null && Objects.equals(ID_repair_shop, that.ID_repair_shop);
+        return id != null && Objects.equals(id, that.id);
     }
 
     @Override

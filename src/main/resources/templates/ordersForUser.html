@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Мои нарачки</title>
+</head>
+<body>
+<h1>Мои нарачки</h1>
+<table>
+  <thead>
+  <tr>
+    <th>Датум на нарачка</th>
+    <th>Нарачан дел</th>
+    <th>Цена</th>
+    <th>Количина</th>
+    <th>Статус</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="order : ${userOrders}">
+    <td th:text="${order.getOrderdate}"></td>
+    <td th:text="${order.getPartname()}"></td>
+    <td th:text="${order.getAmount()}"></td>
+    <td th:text="${order.getQuantity()}"></td>
+    <td th:text="${order.getStatus()}"></td>
+  </tr>
+  </tbody>
+</table>
+</body>
+</html>

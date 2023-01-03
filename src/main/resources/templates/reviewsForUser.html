@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Мои критики</title>
+</head>
+<body>
+<h1>Мои критики</h1>
+<table>
+  <thead>
+  <tr>
+    <th>Оценка</th>
+    <th>Коментар</th>
+    <th>Име на сервис</th>
+    <th>Локација на сервис</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="review : ${userReviews}">
+    <td th:text="${review.getRating}"></td>
+    <td th:text="${review.getRcomment()}"></td>
+    <td th:text="${review.getRsname()}"></td>
+    <td th:text="${review.getRslocation()}"></td>
+  </tr>
+  </tbody>
+</table>
+</body>
+</html>

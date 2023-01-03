@@ -1,13 +1,16 @@
 package com.example.autopartz.controller;
 
 import com.example.autopartz.model.*;
+import com.example.autopartz.model.views.*;
 import com.example.autopartz.repository.*;
 import com.example.autopartz.service.UserService;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
+@Controller
 @RequestMapping("/")
 public class UserController {
     private final UserService userService;
@@ -38,15 +41,18 @@ public class UserController {
         return partsForCarTypeAndCategoryRepository.findAllByCartypeAndCategory(cartype,category);
     }
     @GetMapping("orders/{id}")
-    public List<OrdersForUser> getOrdersForUser(@PathVariable Long id){
-        return ordersForUserRepository.findAllByUserid(id);
+    public String getOrdersForUser(@PathVariable Long id, Model model){
+        model.addAttribute("userOrders",ordersForUserRepository.findAllByUserid(id));
+        return "ordersForUser";
     }
     @GetMapping("repairs/{id}")
-    public List<RepairsForUser> getRepairsForUser(@PathVariable Long id){
-        return repairsForUserRepository.findAllByUserid(id);
+    public String getRepairsForUser(@PathVariable Long id,Model model){
+        model.addAttribute("userRepairs",repairsForUserRepository.findAllByUserid(id));
+        return "repairsForUser";
     }
     @GetMapping("reviews/{id}")
-    public List<ReviewsForUser> getReviewsForUser(@PathVariable Long id){
-        return reviewsForUserRepository.findAllByUserid(id);
+    public String getReviewsForUser(@PathVariable Long id, Model model){
+        model.addAttribute("userReviews",reviewsForUserRepository.findAllByUserid(id));
+        return "reviewsForUser";
     }
 }

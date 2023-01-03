@@ -1,0 +1,39 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <title>Почетна</title>
+</head>
+<body>
+<header>
+    <a th:href="${'/orders/4'}">Мои нарачки</a>
+    <a th:href="${'/repairs/4'}">Мои поправки</a>
+    <a th:href="${'/reviews/4'}">Мои критики</a>
+</header>
+<main>
+    <h1>Сите производи</h1>
+    <table>
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Manufacturer</th>
+            <th>Details</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="part : ${parts}">
+            <td th:text="${part.getName()}"></td>
+            <td th:text="${part.getDescription()}"></td>
+            <td th:text="${part.getManufacturer().getName()}"></td>
+            <td>
+                <form th:action="@{'/part/{id}' (id=${part.getId()}) }">
+                    <button type="submit">Детали</button>
+                </form>
+            </td>
+            </tr>
+        </tbody>
+    </table>
+</main>
+</body>
+</html>

@@ -1,7 +1,7 @@
 package com.example.autopartz.repository;
 
-import com.example.autopartz.model.OrdersForUser;
-import com.example.autopartz.model.OrdersForUserId;
+import com.example.autopartz.model.views.OrdersForUser;
+import com.example.autopartz.model.views.OrdersForUserId;
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

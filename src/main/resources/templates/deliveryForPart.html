@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Податоци за достава</title>
+</head>
+<body>
+<header>
+  <h1>Податоци за достава</h1>
+</header>
+<main>
+  <h3>Достава до дома</h3>
+  <form class="form-signin mt-xl-5" method="post" action="/part/homedelivery">
+    <p>
+      <label for="address" class="sr-only">Адреса</label>
+      <input type="text" id="address" name="address" class="form-control" placeholder="Внесете ја вашата адреса" required="" autofocus=""/>
+    </p>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Достава до дома</button>
+  </form>
+  <h3>Достава до овластен сервис</h3>
+  <form class="form-signin mt-xl-5" method="post" action="/part/repairshopdelivery">
+    <p>
+      <label for="repairShop" class="sr-only">Избор на овластен сервис</label>
+      <select id="repairShop" required name="name">
+        <option  th:each="rs : ${repairShops}"
+                 th:text="${rs.getName()}"
+                 th:value="${rs.getId()}">
+        </option>
+      </select>
+    </p>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Достава до сервис</button>
+  </form>
+</main>
+
+</body>
+</html>

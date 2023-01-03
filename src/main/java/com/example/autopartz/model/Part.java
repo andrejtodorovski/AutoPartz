@@ -17,12 +17,15 @@ import java.util.Objects;
 @Entity
 public class Part {
     @Id
-    Long ID_part;
-    String part_name;
-    String part_description;
+    @Column(name = "ID_part")
+    Long id;
+    @Column(name = "part_name")
+    String name;
+    @Column(name = "part_description")
+    String description;
     @ManyToOne
     @JoinColumn(name = "id_part_manufacturer")
-    PartManufacturer partManufacturer;
+    PartManufacturer manufacturer;
     @ManyToMany
     @JoinTable(name = "part_is_from_category", joinColumns =
     @JoinColumn(name = "id_part"),
@@ -47,7 +50,7 @@ public class Part {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
         Part part = (Part) o;
-        return ID_part != null && Objects.equals(ID_part, part.ID_part);
+        return id != null && Objects.equals(id, part.id);
     }
 
     @Override

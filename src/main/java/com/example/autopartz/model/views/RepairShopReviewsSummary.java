@@ -1,4 +1,4 @@
-package com.example.autopartz.model;
+package com.example.autopartz.model.views;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -6,7 +6,6 @@ import jakarta.persistence.Table;
 import lombok.*;
 import org.hibernate.Hibernate;
 import org.hibernate.annotations.Immutable;
-import org.hibernate.annotations.Subselect;
 
 import java.io.Serial;
 import java.io.Serializable;

@@ -1,5 +1,6 @@
 package com.example.autopartz.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
@@ -17,7 +18,8 @@ import java.util.Objects;
 public class PartManufacturer {
     @Id
     Long ID_part_manufacturer;
-    String pm_name;
+    @Column(name = "pm_name")
+    String name;
     String pm_location;
 
     @Override

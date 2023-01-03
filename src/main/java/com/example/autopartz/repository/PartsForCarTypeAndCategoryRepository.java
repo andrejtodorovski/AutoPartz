@@ -1,6 +1,6 @@
 package com.example.autopartz.repository;
 
-import com.example.autopartz.model.PartsForCarTypeAndCategory;
+import com.example.autopartz.model.views.PartsForCarTypeAndCategory;
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
