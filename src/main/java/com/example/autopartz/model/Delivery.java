@@ -1,9 +1,12 @@
 package com.example.autopartz.model;
 
-import jakarta.persistence.*;
-import lombok.*;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.Hibernate;
 
+import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
@@ -13,7 +16,7 @@ import java.util.Objects;
 @RequiredArgsConstructor
 public class Delivery {
     @Id
-    Long ID_delivery;
+    Integer ID_delivery;
     String delivery_status;
     String delivery_address;
     @ManyToOne

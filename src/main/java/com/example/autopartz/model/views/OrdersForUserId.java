@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 
 @Data
 public class OrdersForUserId implements Serializable {
-    Long userid;
+    Integer userid;
     LocalDateTime orderdate;
     String partname;
 }

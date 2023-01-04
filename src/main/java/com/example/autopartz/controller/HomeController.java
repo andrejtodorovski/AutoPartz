@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServletRequest;
+
 @Controller
 @RequestMapping("/")
 public class HomeController {
@@ -34,8 +36,9 @@ public class HomeController {
     }
 
     @GetMapping()
-    public String getHomePage(Model model){
+    public String getHomePage(Model model, HttpServletRequest request){
         model.addAttribute("bodyContent","home");
+        model.addAttribute("user",request.getRemoteUser());
         return "master-template";
     }
     @GetMapping("/products")

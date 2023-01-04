@@ -1,10 +1,13 @@
 package com.example.autopartz.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import lombok.*;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.Hibernate;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.util.Objects;
 
 @Getter
@@ -14,7 +17,7 @@ import java.util.Objects;
 @Entity
 public class Warehouse {
     @Id
-    Long ID_warehouse;
+    Integer ID_warehouse;
     String warehouse_location;
 
     @Override

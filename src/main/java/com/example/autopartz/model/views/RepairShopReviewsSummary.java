@@ -1,12 +1,15 @@
 package com.example.autopartz.model.views;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import lombok.*;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.Hibernate;
 import org.hibernate.annotations.Immutable;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.Objects;
@@ -23,9 +26,9 @@ public class RepairShopReviewsSummary implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
     @Id
-    Long rsid;
+    Integer rsid;
     String rsname;
-    Integer reviewcount;
+    Long reviewcount;
     Float reviewaverage;
 
     @Override

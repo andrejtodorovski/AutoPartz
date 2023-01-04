@@ -1,9 +1,12 @@
 package com.example.autopartz.model;
 
-import jakarta.persistence.*;
-import lombok.*;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.Hibernate;
 
+import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
@@ -15,7 +18,7 @@ import java.util.Objects;
 @Table(name = "service_book")
 public class ServiceBook {
     @Id
-    Long ID_service_book;
+    Integer ID_service_book;
     LocalDateTime sb_created_on;
     @OneToOne
     @JoinColumn(name = "vin")

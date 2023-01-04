@@ -1,12 +1,15 @@
 package com.example.autopartz.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import lombok.*;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.Hibernate;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import java.util.Objects;
 
 @Getter
@@ -16,7 +19,7 @@ import java.util.Objects;
 @Entity
 public class Repair {
     @Id
-    Long ID_repair;
+    Integer ID_repair;
     @ManyToOne
     @JoinColumn(name = "vin")
     CarSample carSample;

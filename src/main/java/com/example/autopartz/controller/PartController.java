@@ -4,11 +4,11 @@ import com.example.autopartz.model.Part;
 import com.example.autopartz.service.PartService;
 import com.example.autopartz.service.PriceService;
 import com.example.autopartz.service.RepairShopService;
-import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @Controller
@@ -23,7 +23,7 @@ public class PartController {
         this.priceService = priceService;
     }
     @GetMapping("/{id}")
-    public String getPartPage(@PathVariable Long id, Model model){
+    public String getPartPage(@PathVariable Integer id, Model model){
         Part temp = partService.findById(id);
         Integer amount = priceService.findPriceForPart(temp).stream().findFirst().orElseThrow(RuntimeException::new).getAmount();
         model.addAttribute("part",temp);
@@ -32,7 +32,7 @@ public class PartController {
         return "master-template";
     }
     @GetMapping("/delivery/{id}")
-    public String getDeliveryPage(@PathVariable Long id, Model model){
+    public String getDeliveryPage(@PathVariable Integer id, Model model){
         model.addAttribute("repairShops",repairShopService.findAll());
         model.addAttribute("partId",id);
         model.addAttribute("bodyContent","deliveryForPart");

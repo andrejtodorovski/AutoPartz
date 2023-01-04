@@ -9,5 +9,5 @@ import java.util.List;
 
 @Repository
 public interface RepairsForUserRepository extends JpaRepository<RepairsForUser, OrdersForUserId> {
-    List<RepairsForUser> findAllByUserid(Long userid);
+    List<RepairsForUser> findAllByUserid(Integer userid);
 }

@@ -19,4 +19,9 @@ public class UserServiceImpl implements UserService {
     public List<User> findAllUsers() {
         return userRepository.findAll();
     }
+
+    @Override
+    public User findByUsername(String username) {
+        return userRepository.findAllByUsername(username).stream().findFirst().orElseThrow(RuntimeException::new);
+    }
 }

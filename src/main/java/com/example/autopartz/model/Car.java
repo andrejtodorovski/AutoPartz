@@ -1,9 +1,12 @@
 package com.example.autopartz.model;
 
-import jakarta.persistence.*;
-import lombok.*;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.Hibernate;
 
+import javax.persistence.*;
 import java.util.Objects;
 
 @Getter
@@ -14,7 +17,7 @@ import java.util.Objects;
 @Table(name = "car")
 public class Car {
     @Id
-    Long ID_car;
+    Integer ID_car;
     Integer in_production_since;
     Integer in_production_till;
     @Column(name = "car_type")

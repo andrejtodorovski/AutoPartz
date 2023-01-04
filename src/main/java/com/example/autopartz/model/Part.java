@@ -1,12 +1,12 @@
 package com.example.autopartz.model;
 
-import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.Hibernate;
 
+import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
 
@@ -18,7 +18,7 @@ import java.util.Objects;
 public class Part {
     @Id
     @Column(name = "ID_part")
-    Long id;
+    Integer id;
     @Column(name = "part_name")
     String name;
     @Column(name = "part_description")

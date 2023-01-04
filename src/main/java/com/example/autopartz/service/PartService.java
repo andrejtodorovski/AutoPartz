@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface PartService {
     List<Part> findAll();
-    Part findById(Long id);
+    Part findById(Integer id);
 }

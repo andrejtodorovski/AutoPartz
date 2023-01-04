@@ -21,7 +21,7 @@ public class PartServiceImpl implements PartService {
     }
 
     @Override
-    public Part findById(Long id) {
+    public Part findById(Integer id) {
         return partRepository.findById(id).orElseThrow(RuntimeException::new);
     }
 }

@@ -1,11 +1,14 @@
 package com.example.autopartz.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import lombok.*;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.Hibernate;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.Objects;
 
 @Getter
@@ -16,7 +19,7 @@ import java.util.Objects;
 @Table(name = "car_manufacturer", schema = "project")
 public class CarManufacturer {
     @Id
-    Long ID_car_manufacturer;
+    Integer ID_car_manufacturer;
     String cm_name;
     String cm_country;
 

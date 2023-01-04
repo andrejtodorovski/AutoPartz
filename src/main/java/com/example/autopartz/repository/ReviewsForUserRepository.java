@@ -7,6 +7,6 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface ReviewsForUserRepository extends JpaRepository<ReviewsForUser,Long> {
-    List<ReviewsForUser> findAllByUserid(Long id);
+public interface ReviewsForUserRepository extends JpaRepository<ReviewsForUser,Integer> {
+    List<ReviewsForUser> findAllByUserid(Integer id);
 }

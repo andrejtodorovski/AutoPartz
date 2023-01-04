@@ -1,11 +1,17 @@
 package com.example.autopartz.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
-import lombok.*;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.Hibernate;
+import org.springframework.security.core.GrantedAuthority;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.time.LocalDate;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Objects;
 
 @Getter
@@ -28,5 +34,9 @@ public class Deliveryman extends User{
     @Override
     public int hashCode() {
         return getClass().hashCode();
+    }
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return Collections.singletonList(Role.ROLE_DELIVERYMAN);
     }
 }

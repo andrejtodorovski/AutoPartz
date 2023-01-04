@@ -1,15 +1,15 @@
 package com.example.autopartz.model.views;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.IdClass;
-import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.annotations.Immutable;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
+import javax.persistence.Table;
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -27,7 +27,7 @@ public class RepairsForUser implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
     @Id
-    Long userid;
+    Integer userid;
     @Id
     LocalDateTime orderdate;
     @Id

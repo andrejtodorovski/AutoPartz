@@ -1,12 +1,15 @@
 package com.example.autopartz.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import lombok.*;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.Hibernate;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import java.time.LocalDate;
 import java.util.Objects;
 
@@ -17,7 +20,7 @@ import java.util.Objects;
 @RequiredArgsConstructor
 public class Price {
     @Id
-    Long ID_price;
+    Integer ID_price;
     Integer amount;
     LocalDate price_from;
     LocalDate price_till;
