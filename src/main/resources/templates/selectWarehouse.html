@@ -1,0 +1,11 @@
+<div>
+  <form class="form-signin mt-xl-5" method="post" action="/finishRegister">
+    <label for="location"></label><select class="form-control" id="location" required name="location">
+    <option  th:each="loc : ${locations}"
+             th:text="${loc.getLocation()}"
+             th:value="${loc.getLocation()}">
+    </option>
+  </select>
+    <button type="submit" class="btn btn-primary btn-lg btn-block">Заврши со регистрација</button>
+  </form>
+</div>

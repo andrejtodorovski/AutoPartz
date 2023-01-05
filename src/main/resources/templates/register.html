@@ -27,6 +27,15 @@
                 <label for="rpassword" class="sr-only">Потврди ја лозинката</label>
                 <input type="password" id="rpassword" name="rpassword" class="form-control" placeholder="*********" required=""/>
             </p>
+            <p>
+                <label for="role" class="sr-only">
+                    Одбери улога
+                </label><select class="form-control" id="role" name="role" required>
+                    <option value="client">CLIENT</option>
+                    <option value="warehouseman">WAREHOUSEMAN</option>
+                    <option value="deliveryman">DELIVERYMAN</option>
+                </select>
+            </p>
         </form>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Регистрирај се</button>
     </div>

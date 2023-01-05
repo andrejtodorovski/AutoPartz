@@ -1,0 +1,23 @@
+<div>
+    <h1 th:if="${hasError}" th:text="${error}"></h1>
+    <div th:if="${!hasError}">
+        <h3 th:text="${order.getUser().getUsername()}"></h3>
+        <table>
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Manufacturer</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="part : ${parts}">
+                <td th:text="${part.getName()}"></td>
+                <td th:text="${part.getManufacturer().getName()}"></td>
+            </tr>
+            </tbody>
+        </table>
+        <form th:action="@{'/part/delivery/'}">
+            <button class="btn btn-primary btn-block btn-lg" type="submit">Испрати нарачка</button>
+        </form>
+    </div>
+</div>

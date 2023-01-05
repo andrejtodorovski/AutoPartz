@@ -22,9 +22,16 @@ import java.util.Objects;
 @Entity
 public class Warehouseman extends User{
     LocalDate employed_from;
+    public static final LocalDate defaultEmployedFrom = LocalDate.of(2020,1,1);
     @ManyToOne
     @JoinColumn(name = "id_warehouse")
     Warehouse warehouse;
+
+    public Warehouseman(String username, String name, String email, String password, String number, Warehouse warehouse) {
+        super(username, name, email, password, number);
+        this.employed_from=defaultEmployedFrom;
+        this.warehouse= warehouse;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -40,6 +47,9 @@ public class Warehouseman extends User{
     }
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.singletonList(Role.ROLE_WAREHOUSEMAN);
+        if(employed_from==defaultEmployedFrom)
+            return Collections.singletonList(Role.ROLE_PENDING_WAREHOUSEMAN);
+        else
+            return Collections.singletonList(Role.ROLE_WAREHOUSEMAN);
     }
 }

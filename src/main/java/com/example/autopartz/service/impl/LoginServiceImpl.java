@@ -1,9 +1,11 @@
 package com.example.autopartz.service.impl;
 
-import com.example.autopartz.model.User;
+import com.example.autopartz.model.*;
 import com.example.autopartz.repository.UserRepository;
 import com.example.autopartz.service.LoginService;
 import org.springframework.stereotype.Service;
+
+import java.util.Objects;
 
 @Service
 public class LoginServiceImpl implements LoginService {
@@ -14,13 +16,24 @@ public class LoginServiceImpl implements LoginService {
     }
 
     @Override
-    public User register(String name, String username, String email, String number, String password) {
-        return userRepository.save(new User(username,name,email,password,number));
+    public void register(String name, String username, String email, String number, String password, String role) {
+        if (Objects.equals(role, "client")) {
+            userRepository.save(new Client(username, name, email, password, number));
+        }
+        else {
+            userRepository.save(new Deliveryman(username, name, email, password, number));
+        }
     }
 
     @Override
     public User login(String username, String password) {
         return userRepository.findAllByUsernameAndPassword(username,password).stream().findFirst().orElseThrow(RuntimeException::new);
+    }
+
+    @Override
+    public void registerWarehouseman(String name, String username, String email, String number, String password, String role, Warehouse warehouse) {
+        userRepository.save(new Warehouseman(username, name, email, password, number, warehouse));
+
     }
 
 //    @Override

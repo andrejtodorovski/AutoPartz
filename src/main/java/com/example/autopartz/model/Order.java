@@ -19,6 +19,7 @@ import java.util.Objects;
 @Table(name = "order_table")
 public class Order {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer ID_order;
     String order_status;
     LocalDateTime order_date;
@@ -31,6 +32,12 @@ public class Order {
             inverseJoinColumns = @JoinColumn(name = "id_part"))
     @ToString.Exclude
     List<Part> partList;
+
+    public Order(Client user) {
+        this.order_status = "created";
+        this.user = user;
+        this.order_date = LocalDateTime.now();
+    }
 
     @Override
     public boolean equals(Object o) {

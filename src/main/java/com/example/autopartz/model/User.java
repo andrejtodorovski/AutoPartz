@@ -23,6 +23,7 @@ import java.util.Objects;
 @Inheritance(strategy = InheritanceType.JOINED)
 public class User implements UserDetails {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer ID_user;
     String username;
     String email;

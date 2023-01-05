@@ -1,12 +1,13 @@
 package com.example.autopartz.controller;
 
+import com.example.autopartz.model.Order;
 import com.example.autopartz.model.User;
+import com.example.autopartz.model.Warehouse;
+import com.example.autopartz.repository.OrderContainsPartRepository;
 import com.example.autopartz.repository.PartsForCarTypeAndCategoryRepository;
 import com.example.autopartz.repository.RepairShopReviewSummaryRepository;
-import com.example.autopartz.service.CarService;
-import com.example.autopartz.service.CategoryService;
-import com.example.autopartz.service.LoginService;
-import com.example.autopartz.service.PartService;
+import com.example.autopartz.repository.WarehouseRepository;
+import com.example.autopartz.service.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +16,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.util.Objects;
 
 @Controller
 @RequestMapping("/")
@@ -25,14 +30,21 @@ public class HomeController {
     private final CarService carService;
     private final CategoryService categoryService;
     private final RepairShopReviewSummaryRepository repairShopReviewSummaryRepository;
+    private final WarehouseRepository warehouseRepository;
+    private final OrderContainsPartRepository orderContainsPartRepository;
+    private final OrderService orderService;
 
-    public HomeController(LoginService loginService, PartService partService, PartsForCarTypeAndCategoryRepository partsForCarTypeAndCategoryRepository, CarService carService, CategoryService categoryService, RepairShopReviewSummaryRepository repairShopReviewSummaryRepository) {
+    public HomeController(LoginService loginService, PartService partService, PartsForCarTypeAndCategoryRepository partsForCarTypeAndCategoryRepository, CarService carService, CategoryService categoryService, RepairShopReviewSummaryRepository repairShopReviewSummaryRepository, WarehouseRepository warehouseRepository,
+                          OrderContainsPartRepository orderContainsPartRepository, OrderService orderService) {
         this.loginService = loginService;
         this.partService = partService;
         this.partsForCarTypeAndCategoryRepository = partsForCarTypeAndCategoryRepository;
         this.carService = carService;
         this.categoryService = categoryService;
         this.repairShopReviewSummaryRepository = repairShopReviewSummaryRepository;
+        this.warehouseRepository = warehouseRepository;
+        this.orderContainsPartRepository = orderContainsPartRepository;
+        this.orderService = orderService;
     }
 
     @GetMapping()
@@ -53,6 +65,21 @@ public class HomeController {
     public String getServices(Model model){
         model.addAttribute("services",repairShopReviewSummaryRepository.findAll());
         model.addAttribute("bodyContent","services");
+        return "master-template";
+    }
+    @GetMapping("/currentOrder")
+    public String getCurrentOrder(Model model,HttpSession session){
+        if(session.getAttribute("order")==null){
+            model.addAttribute("hasError",true);
+            model.addAttribute("error","Нарачката е празна");
+        }
+        else {
+            Order o = (Order) session.getAttribute("order");
+            model.addAttribute("hasError",false);
+            model.addAttribute("order",o);
+            model.addAttribute("parts",orderService.findById(o.getID_order()).getPartList());
+        }
+        model.addAttribute("bodyContent","currentOrder");
         return "master-template";
     }
     @GetMapping("/filtered")
@@ -78,8 +105,52 @@ public class HomeController {
     }
     @PostMapping("/register")
     public void handleRegister(@RequestParam String username, @RequestParam String name,
-                               @RequestParam String password, @RequestParam String email,
-                               @RequestParam String number){
-        User u = loginService.register(name,username,email,number,password);
+                               @RequestParam String password, @RequestParam String rpassword,
+                               @RequestParam String email, @RequestParam String number,
+                               @RequestParam String role, HttpServletResponse response, HttpSession session){
+        System.out.println(username + name + password + rpassword + email + number + role);
+        if(Objects.equals(role, "warehouseman")){
+            session.setAttribute("username", username);
+            session.setAttribute("name", name);
+            session.setAttribute("password", password);
+            session.setAttribute("rpassword", rpassword);
+            session.setAttribute("email", email);
+            session.setAttribute("number", number);
+            try {
+                response.sendRedirect("/registerWarehouseman");
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        else {
+            loginService.register(name, username, email, number, password, role);
+            try {
+                response.sendRedirect("/login");
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+    @GetMapping("/registerWarehouseman")
+    public String getSelectPage(Model model){
+        model.addAttribute("locations",warehouseRepository.findAll());
+        model.addAttribute("bodyContent","selectWarehouse");
+        return "master-template";
+    }
+    @PostMapping("/finishRegister")
+    public void handleWarehousemanRegister(@RequestParam String location,Model model, HttpServletResponse response, HttpSession session){
+        System.out.println("here?");
+        String username = (String) session.getAttribute("username");
+        String name = (String) session.getAttribute("name");
+        String password = (String) session.getAttribute("password");
+        String email = (String) session.getAttribute("email");
+        String number = (String) session.getAttribute("number");
+        Warehouse warehouse = warehouseRepository.findAllByLocation(location).stream().findFirst().orElseThrow(RuntimeException::new);
+        loginService.registerWarehouseman(name,username,email,number,password,"warehouseman",warehouse);
+        try {
+            response.sendRedirect("/login");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

@@ -22,6 +22,12 @@ import java.util.Objects;
 @Table(name = "delivery_man")
 public class Deliveryman extends User{
     LocalDate employed_from;
+    public static final LocalDate defaultEmployedFrom = LocalDate.of(2020,1,1);
+
+    public Deliveryman(String username, String name, String email, String password, String number) {
+        super(username, name, email, password, number);
+        this.employed_from = defaultEmployedFrom;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -37,6 +43,9 @@ public class Deliveryman extends User{
     }
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.singletonList(Role.ROLE_DELIVERYMAN);
+        if(Objects.equals(employed_from, defaultEmployedFrom))
+            return Collections.singletonList(Role.ROLE_PENDING_DELIVERYMAN);
+        else
+            return Collections.singletonList(Role.ROLE_DELIVERYMAN);
     }
 }

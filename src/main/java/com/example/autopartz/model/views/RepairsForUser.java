@@ -32,7 +32,7 @@ public class RepairsForUser implements Serializable {
     LocalDateTime orderdate;
     @Id
     String partname;
-    Integer vin;
+    Integer orderid;
     String rsname;
 }
 

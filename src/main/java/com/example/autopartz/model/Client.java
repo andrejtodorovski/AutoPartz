@@ -18,6 +18,10 @@ import java.util.Objects;
 @RequiredArgsConstructor
 @Entity
 public class Client extends User{
+    public Client(String username, String name, String email, String password, String number) {
+        super(username, name, email, password, number);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
