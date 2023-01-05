@@ -1,0 +1,19 @@
+<div>
+    <h1>Мој магацин</h1>
+    <table>
+        <thead>
+        <tr>
+            <th>Магацин</th>
+            <th>Дел</th>
+            <th>Количина</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="p : ${parts}">
+            <td th:text="${p.getWarehouseid}"></td>
+            <td th:text="${p.getPartid()}"></td>
+            <td th:text="${p.getQuantity()}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>

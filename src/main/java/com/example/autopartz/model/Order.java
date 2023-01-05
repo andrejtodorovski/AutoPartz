@@ -20,9 +20,11 @@ import java.util.Objects;
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Integer ID_order;
+    @Column(name = "ID_order")
+    Integer orderid;
     String order_status;
-    LocalDateTime order_date;
+    @Column(name = "order_date")
+    LocalDateTime date;
     @JoinColumn(name = "id_user")
     @ManyToOne
     Client user;
@@ -36,7 +38,7 @@ public class Order {
     public Order(Client user) {
         this.order_status = "created";
         this.user = user;
-        this.order_date = LocalDateTime.now();
+        this.date = LocalDateTime.now();
     }
 
     @Override
@@ -44,7 +46,7 @@ public class Order {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
         Order order = (Order) o;
-        return ID_order != null && Objects.equals(ID_order, order.ID_order);
+        return orderid != null && Objects.equals(orderid, order.orderid);
     }
 
     @Override

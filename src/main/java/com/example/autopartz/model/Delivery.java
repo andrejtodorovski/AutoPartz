@@ -17,8 +17,10 @@ import java.util.Objects;
 public class Delivery {
     @Id
     Integer ID_delivery;
-    String delivery_status;
-    String delivery_address;
+    @Column(name = "delivery_status")
+    String status;
+    @Column(name = "delivery_address")
+    String address;
     @ManyToOne
     @JoinColumn(name = "id_user")
     Deliveryman deliveryman;

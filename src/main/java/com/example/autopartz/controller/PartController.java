@@ -76,7 +76,7 @@ public class PartController {
             session.setAttribute("order",newOrder);
         }
         Order order = (Order) session.getAttribute("order");
-        orderContainsPartRepository.save(new OrderContainsPart(id,order.getID_order(),quantity));
+        orderContainsPartRepository.save(new OrderContainsPart(id,order.getOrderid(),quantity));
         try {
             response.sendRedirect("/products");
         } catch (IOException e) {

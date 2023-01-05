@@ -1,0 +1,21 @@
+<div>
+    <h1>Мои достави</h1>
+    <table>
+        <thead>
+        <tr>
+            <th>Статус на достава</th>
+            <th>Адреса на достава</th>
+            <th>Број на нарачка</th>
+            <th>Датум на нарачка</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="d : ${deliveries}">
+            <td th:text="${d.getStatus}"></td>
+            <td th:text="${d.getAddress()}"></td>
+            <td th:text="${d.getOrder().getOrderid()}"></td>
+            <td th:text="${d.getOrder().getDate()}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>

@@ -1,12 +1,8 @@
 package com.example.autopartz.controller;
 
-import com.example.autopartz.model.Order;
-import com.example.autopartz.model.User;
-import com.example.autopartz.model.Warehouse;
-import com.example.autopartz.repository.OrderContainsPartRepository;
-import com.example.autopartz.repository.PartsForCarTypeAndCategoryRepository;
-import com.example.autopartz.repository.RepairShopReviewSummaryRepository;
-import com.example.autopartz.repository.WarehouseRepository;
+import com.example.autopartz.model.*;
+import com.example.autopartz.model.manytomany.PartIsInStockInWarehouse;
+import com.example.autopartz.repository.*;
 import com.example.autopartz.service.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.List;
 import java.util.Objects;
 
 @Controller
@@ -33,9 +30,11 @@ public class HomeController {
     private final WarehouseRepository warehouseRepository;
     private final OrderContainsPartRepository orderContainsPartRepository;
     private final OrderService orderService;
-
+    private final UserService userService;
+    private final DeliveryService deliveryService;
+    private final PartIsInStockInWarehouseRepository partIsInStockInWarehouseRepository;
     public HomeController(LoginService loginService, PartService partService, PartsForCarTypeAndCategoryRepository partsForCarTypeAndCategoryRepository, CarService carService, CategoryService categoryService, RepairShopReviewSummaryRepository repairShopReviewSummaryRepository, WarehouseRepository warehouseRepository,
-                          OrderContainsPartRepository orderContainsPartRepository, OrderService orderService) {
+                          OrderContainsPartRepository orderContainsPartRepository, OrderService orderService, UserService userService, DeliveryService deliveryService, PartIsInStockInWarehouseRepository partIsInStockInWarehouseRepository) {
         this.loginService = loginService;
         this.partService = partService;
         this.partsForCarTypeAndCategoryRepository = partsForCarTypeAndCategoryRepository;
@@ -45,6 +44,9 @@ public class HomeController {
         this.warehouseRepository = warehouseRepository;
         this.orderContainsPartRepository = orderContainsPartRepository;
         this.orderService = orderService;
+        this.userService = userService;
+        this.deliveryService = deliveryService;
+        this.partIsInStockInWarehouseRepository = partIsInStockInWarehouseRepository;
     }
 
     @GetMapping()
@@ -77,7 +79,7 @@ public class HomeController {
             Order o = (Order) session.getAttribute("order");
             model.addAttribute("hasError",false);
             model.addAttribute("order",o);
-            model.addAttribute("parts",orderService.findById(o.getID_order()).getPartList());
+            model.addAttribute("parts",orderService.findById(o.getOrderid()).getPartList());
         }
         model.addAttribute("bodyContent","currentOrder");
         return "master-template";
@@ -152,5 +154,28 @@ public class HomeController {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+    @GetMapping("/access_denied")
+    public String accessDenied(Model model){
+        model.addAttribute("bodyContent","access_denied");
+        return "master-template";
+    }
+    @GetMapping("/myWarehouse")
+    public String myWarehouse(Model model, HttpServletRequest request){
+        Warehouseman whm = (Warehouseman) userService.findByUsername(request.getRemoteUser());
+        Warehouse warehouse = whm.getWarehouse();
+        List<PartIsInStockInWarehouse> partIsInStockInWarehouseList = partIsInStockInWarehouseRepository.findAllByWarehouseid(warehouse.getID_warehouse());
+        model.addAttribute("bodyContent","myWarehouse");
+        model.addAttribute("warehouse",warehouse);
+        model.addAttribute("parts", partIsInStockInWarehouseList);
+        return "master-template";
+    }
+    @GetMapping("myDeliveries")
+    public String myDeliveries(Model model, HttpServletRequest request){
+        Deliveryman dm = (Deliveryman) userService.findByUsername(request.getRemoteUser());
+        List<Delivery> deliveries = deliveryService.findAllByDeliverer(dm);
+        model.addAttribute("bodyContent","myDeliveries");
+        model.addAttribute("deliveries",deliveries);
+        return "master-template";
     }
 }

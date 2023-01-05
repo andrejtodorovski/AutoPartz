@@ -35,8 +35,8 @@ public class TestController {
 
         User u = userService.findByUsername("client13");
         Order o = orderService.create((Client) u);
-        orderContainsPartRepository.save(new OrderContainsPart(5,o.getID_order(),2));
-        orderContainsPartRepository.save(new OrderContainsPart(7,o.getID_order(),1));
+        orderContainsPartRepository.save(new OrderContainsPart(5,o.getOrderid(),2));
+        orderContainsPartRepository.save(new OrderContainsPart(7,o.getOrderid(),1));
     }
     @GetMapping("/t")
     public List<Part> getParts(){
