@@ -49,8 +49,9 @@ public class PartController {
         return "master-template";
     }
     @PostMapping("/repairshopdelivery")
-    public void setRepairShopDelivery(@RequestParam String name, HttpServletResponse response){
+    public void setRepairShopDelivery(@RequestParam String name, HttpServletResponse response, HttpSession session){
         // insert into project.repair (vin, id_repair_shop, id_service_book) values (1111,3,1)
+        session.removeAttribute("order");
         try {
             response.sendRedirect("/");
         } catch (IOException e) {
@@ -58,8 +59,9 @@ public class PartController {
         }
     }
     @PostMapping("/homedelivery")
-    public void setHomeDelivery(@RequestParam String address, HttpServletResponse response){
+    public void setHomeDelivery(@RequestParam String address, HttpServletResponse response, HttpSession session){
         // insert into delivery (delivery_status, delivery_address,id_user,id_order) values ('in progress','Aerodrom',4,1)
+        session.removeAttribute("order");
         try {
             response.sendRedirect("/");
         } catch (IOException e) {

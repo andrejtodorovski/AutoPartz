@@ -101,7 +101,7 @@ public class HomeController {
     @PostMapping("/login")
     public void handleLogin(@RequestParam String username, @RequestParam String password){
         User u = loginService.login(username,password);
-        System.out.println(u.getName_user());
+        System.out.println(u.getName());
     }
     @PostMapping("/register")
     public void handleRegister(@RequestParam String username, @RequestParam String name,

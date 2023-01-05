@@ -24,10 +24,12 @@ import java.util.Objects;
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Integer ID_user;
+    @Column(name = "ID_user")
+    Integer id;
     String username;
     String email;
-    String name_user;
+    @Column(name = "name_user")
+    String name;
     @Column(name = "password_user")
     String password;
     LocalDateTime user_created_on;
@@ -38,7 +40,7 @@ public class User implements UserDetails {
 
     public User(String username, String name, String email, String password, String number) {
         this.username = username;
-        this.name_user = name;
+        this.name = name;
         this.email = email;
         this.password = password;
         this.phone_number = number;
@@ -50,7 +52,7 @@ public class User implements UserDetails {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
         User user = (User) o;
-        return ID_user != null && Objects.equals(ID_user, user.ID_user);
+        return id != null && Objects.equals(id, user.id);
     }
 
     @Override

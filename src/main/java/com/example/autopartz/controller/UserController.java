@@ -27,21 +27,21 @@ public class UserController {
     }
     @GetMapping("orders")
     public String getOrdersForUser(Model model, HttpServletRequest request){
-        Integer id = userService.findByUsername(request.getRemoteUser()).getID_user();
+        Integer id = userService.findByUsername(request.getRemoteUser()).getId();
         model.addAttribute("userOrders",ordersForUserRepository.findAllByUserid(id));
         model.addAttribute("bodyContent","ordersForUser");
         return "master-template";
     }
     @GetMapping("repairs")
     public String getRepairsForUser(Model model, HttpServletRequest request){
-        Integer id = userService.findByUsername(request.getRemoteUser()).getID_user();
+        Integer id = userService.findByUsername(request.getRemoteUser()).getId();
         model.addAttribute("userRepairs",repairsForUserRepository.findAllByUserid(id));
         model.addAttribute("bodyContent","repairsForUser");
         return "master-template";
     }
     @GetMapping("reviews")
     public String getReviewsForUser(Model model,HttpServletRequest request){
-        Integer id = userService.findByUsername(request.getRemoteUser()).getID_user();
+        Integer id = userService.findByUsername(request.getRemoteUser()).getId();
         model.addAttribute("userReviews",reviewsForUserRepository.findAllByUserid(id));
         model.addAttribute("bodyContent","reviewsForUser");
         return "master-template";

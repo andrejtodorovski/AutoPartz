@@ -7,6 +7,7 @@
     <th>Коментар</th>
     <th>Име на сервис</th>
     <th>Локација на сервис</th>
+    <th>За нарачка број</th>
   </tr>
   </thead>
   <tbody>
@@ -15,6 +16,7 @@
     <td th:text="${review.getRcomment()}"></td>
     <td th:text="${review.getRsname()}"></td>
     <td th:text="${review.getRslocation()}"></td>
+    <td th:text="${review.getOrderid}"></td>
   </tr>
   </tbody>
 </table>

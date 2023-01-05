@@ -1,0 +1,24 @@
+<div>
+  <table>
+    <thead>
+    <tr>
+      <th>Name</th>
+      <th>Username</th>
+      <th>Role</th>
+      <th>Approve</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="user : ${users}">
+      <td th:text="${user.getName()}"></td>
+      <td th:text="${user.getUsername()}"></td>
+      <td th:text="${user.getAuthorities()}"></td>
+      <td>
+        <form method="post" th:action="@{'/approve/{id}' (id=${user.getId()}) }">
+          <button type="submit">Approve</button>
+        </form>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>

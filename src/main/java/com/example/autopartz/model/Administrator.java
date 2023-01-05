@@ -26,7 +26,7 @@ public class Administrator extends User{
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
         Administrator that = (Administrator) o;
-        return ID_user != null && Objects.equals(ID_user, that.ID_user);
+        return id != null && Objects.equals(id, that.id);
     }
 
     @Override

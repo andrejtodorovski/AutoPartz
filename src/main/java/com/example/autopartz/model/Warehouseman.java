@@ -38,7 +38,7 @@ public class Warehouseman extends User{
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
         Warehouseman that = (Warehouseman) o;
-        return ID_user != null && Objects.equals(ID_user, that.ID_user);
+        return id != null && Objects.equals(id, that.id);
     }
 
     @Override
@@ -47,7 +47,7 @@ public class Warehouseman extends User{
     }
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        if(employed_from==defaultEmployedFrom)
+        if(Objects.equals(employed_from, defaultEmployedFrom))
             return Collections.singletonList(Role.ROLE_PENDING_WAREHOUSEMAN);
         else
             return Collections.singletonList(Role.ROLE_WAREHOUSEMAN);

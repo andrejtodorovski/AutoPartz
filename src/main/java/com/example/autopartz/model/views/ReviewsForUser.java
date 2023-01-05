@@ -27,6 +27,7 @@ public class ReviewsForUser implements Serializable {
     Integer repairid;
     Integer userid;
     Integer rating;
+    Integer orderid;
     String rcomment;
     String rsname;
     String rslocation;
