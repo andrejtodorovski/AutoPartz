@@ -1,0 +1,22 @@
+<div>
+  <h1>Нарачка број <span th:text="${o.getOrderid()}"></span></h1>
+  <table>
+    <thead>
+    <tr>
+      <th>Име на делот</th>
+      <th>Количина</th>
+      <th>Производител на делот</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="p : ${parts}">
+      <td th:text="${p.getPartname}"></td>
+      <td th:text="${p.getQuantity()}"></td>
+      <td th:text="${p.getManufacturername()}"></td>
+    </tr>
+    </tbody>
+  </table>
+  <form method="post" th:action="@{'/finishDelivery/{id}' (id=${o.getOrderid()}) }">
+    <button class="btn btn-primary btn-block btn-lg" type="submit">Заврши достава</button>
+  </form>
+</div>

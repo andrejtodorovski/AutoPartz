@@ -1,12 +1,27 @@
 <div>
-<p th:text="${part.getName()}"></p>
-<p th:text="${part.getDescription()}"></p>
-<p th:text="${part.getManufacturer().getName()}"></p>
-<p><span th:text="${amount}"></span><span> денари</span></p>
+    <table class="table table-bordered mt-4">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">Име</th>
+            <th scope="col">Опис</th>
+            <th scope="col">Производител</th>
+            <th scope="col">Цена</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td th:text="${part.getName()}"></td>
+            <td th:text="${part.getDescription()}"></td>
+            <td th:text="${part.getManufacturer().getName()}"></td>
+            <td><span th:text="${amount}"></span><span> денари</span></td>
+        </tr>
+        </tbody>
+    </table>
+
 <form method="post" th:action="@{'/part/addToOrder/{id}' (id=${part.getId()}) }">
     <label>
-        <input type="number" name="quantity" required min="1" placeholder="Количина"/>
+        <input class="form-control d-inline" type="number" name="quantity" required min="1" placeholder="Количина"/>
     </label>
-    <button class="btn btn-primary btn-block btn-lg" type="submit">Додај во нарачка</button>
+    <button class="btn btn-primary btn-block btn-lg w-25 d-inline" type="submit">Додај во нарачка</button>
 </form>
 </div>

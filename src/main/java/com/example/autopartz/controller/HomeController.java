@@ -1,20 +1,22 @@
 package com.example.autopartz.controller;
 
 import com.example.autopartz.model.*;
+import com.example.autopartz.model.DTO.OrderInfo;
+import com.example.autopartz.model.manytomany.OrderContainsPart;
 import com.example.autopartz.model.manytomany.PartIsInStockInWarehouse;
+import com.example.autopartz.model.views.DeliveriesInProgress;
+import com.example.autopartz.model.views.PartsForCarTypeAndCategory;
 import com.example.autopartz.repository.*;
 import com.example.autopartz.service.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -31,10 +33,11 @@ public class HomeController {
     private final OrderContainsPartRepository orderContainsPartRepository;
     private final OrderService orderService;
     private final UserService userService;
+    private final DeliveriesInProgressRepository deliveriesInProgressRepository;
     private final DeliveryService deliveryService;
     private final PartIsInStockInWarehouseRepository partIsInStockInWarehouseRepository;
     public HomeController(LoginService loginService, PartService partService, PartsForCarTypeAndCategoryRepository partsForCarTypeAndCategoryRepository, CarService carService, CategoryService categoryService, RepairShopReviewSummaryRepository repairShopReviewSummaryRepository, WarehouseRepository warehouseRepository,
-                          OrderContainsPartRepository orderContainsPartRepository, OrderService orderService, UserService userService, DeliveryService deliveryService, PartIsInStockInWarehouseRepository partIsInStockInWarehouseRepository) {
+                          OrderContainsPartRepository orderContainsPartRepository, OrderService orderService, UserService userService, DeliveriesInProgressRepository deliveriesInProgressRepository, DeliveryService deliveryService, PartIsInStockInWarehouseRepository partIsInStockInWarehouseRepository) {
         this.loginService = loginService;
         this.partService = partService;
         this.partsForCarTypeAndCategoryRepository = partsForCarTypeAndCategoryRepository;
@@ -45,6 +48,7 @@ public class HomeController {
         this.orderContainsPartRepository = orderContainsPartRepository;
         this.orderService = orderService;
         this.userService = userService;
+        this.deliveriesInProgressRepository = deliveriesInProgressRepository;
         this.deliveryService = deliveryService;
         this.partIsInStockInWarehouseRepository = partIsInStockInWarehouseRepository;
     }
@@ -86,7 +90,15 @@ public class HomeController {
     }
     @GetMapping("/filtered")
     public String getPartsForCarTypeAndCategory(@RequestParam String cartype, @RequestParam String category, Model model){
-        model.addAttribute("filtered", partsForCarTypeAndCategoryRepository.findAllByCartypeAndCategory(cartype,category));
+        List<PartsForCarTypeAndCategory> tmp = partsForCarTypeAndCategoryRepository.findAllByCartypeAndCategory(cartype,category);
+        if(tmp.size()==0){
+            model.addAttribute("hasError",true);
+            model.addAttribute("error","Не постојат такви производи, обидете се повторно");
+        }
+        else {
+            model.addAttribute("hasError",false);
+            model.addAttribute("filtered", tmp);
+        }
         model.addAttribute("bodyContent","filteredParts");
         return "master-template";
     }
@@ -176,6 +188,46 @@ public class HomeController {
         List<Delivery> deliveries = deliveryService.findAllByDeliverer(dm);
         model.addAttribute("bodyContent","myDeliveries");
         model.addAttribute("deliveries",deliveries);
+        return "master-template";
+    }
+    @GetMapping("myNextDeliveries")
+    public String myNextDeliveries(Model model, HttpServletRequest request){
+        Deliveryman dm = (Deliveryman) userService.findByUsername(request.getRemoteUser());
+        List<DeliveriesInProgress> ldip = deliveriesInProgressRepository.findAllByUserid(dm.getId());
+        if(ldip.size()==0){
+            model.addAttribute("hasError",true);
+            model.addAttribute("error","Сите достави се завршени");
+        }
+        else {
+            model.addAttribute("hasError",false);
+            model.addAttribute("deliveries", deliveriesInProgressRepository.findAllByUserid(dm.getId()));
+        }
+        model.addAttribute("bodyContent","myNextDeliveries");
+        return "master-template";
+    }
+    @PostMapping("/finishDelivery/{id}")
+    public void finishDelivery(@PathVariable Integer id, Model model, HttpServletResponse response){
+        Delivery d = deliveryService.findByOrder(orderService.findById(id));
+        d.setStatus("finished");
+        deliveryService.update(d);
+        try {
+            response.sendRedirect("/myDeliveries");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    @GetMapping("/order/{id}")
+    public String getOrderInfo(@PathVariable Integer id, Model model){
+        List<OrderContainsPart> list = orderContainsPartRepository.findAllByOrderid(id);
+        List<OrderInfo> partList = new ArrayList<>();
+        for (int i = 0; i < list.size(); i++) {
+            OrderInfo oi = new OrderInfo(partService.findById(list.get(i).getPartid()).getName(),
+                    list.get(i).getQuantity_order(),partService.findById(list.get(i).getPartid()).getManufacturer().getName());
+            partList.add(oi);
+        }
+        model.addAttribute("parts",partList);
+        model.addAttribute("o",orderService.findById(id));
+        model.addAttribute("bodyContent","orderInfo");
         return "master-template";
     }
 }

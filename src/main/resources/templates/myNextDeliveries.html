@@ -1,0 +1,30 @@
+<div>
+  <h1>Мои следни нарачки</h1>
+  <h1 th:if="${hasError}" th:text="${error}"></h1>
+  <div th:if="${!hasError}">
+  <table>
+    <thead>
+    <tr>
+      <th>Статус на достава</th>
+      <th>Адреса на достава</th>
+      <th>Број на нарачка</th>
+      <th>Датум на нарачка</th>
+      <th>Детали за нарачка</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="d : ${deliveries}">
+      <td th:text="${d.getStatus}"></td>
+      <td th:text="${d.getAddress()}"></td>
+      <td th:text="${d.getOrderid()}"></td>
+      <td th:text="${d.getDatum()}"></td>
+      <td>
+        <form method="get" th:action="@{'/order/{id}' (id=${d.getOrderid()}) }">
+          <button class="btn btn-primary btn-block btn-lg" type="submit">Детали</button>
+        </form>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  </div>
+</div>
