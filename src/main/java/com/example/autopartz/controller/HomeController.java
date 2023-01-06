@@ -1,6 +1,7 @@
 package com.example.autopartz.controller;
 
 import com.example.autopartz.model.*;
+import com.example.autopartz.model.DTO.CurrentOrderDTO;
 import com.example.autopartz.model.DTO.OrderInfo;
 import com.example.autopartz.model.manytomany.OrderContainsPart;
 import com.example.autopartz.model.manytomany.PartIsInStockInWarehouse;
@@ -39,8 +40,9 @@ public class HomeController {
     private final CarCategoryReportRepository carCategoryReportRepository;
     private final PartManufacturersReportRepository partManufacturersReportRepository;
     private final MostPurchasedPartRepository mostPurchasedPartRepository;
+    private final PriceService priceService;
     public HomeController(LoginService loginService, PartService partService, PartsForCarTypeAndCategoryRepository partsForCarTypeAndCategoryRepository, CarService carService, CategoryService categoryService, RepairShopReviewSummaryRepository repairShopReviewSummaryRepository, WarehouseRepository warehouseRepository,
-                          OrderContainsPartRepository orderContainsPartRepository, OrderService orderService, UserService userService, DeliveriesInProgressRepository deliveriesInProgressRepository, DeliveryService deliveryService, PartIsInStockInWarehouseRepository partIsInStockInWarehouseRepository, CarCategoryReportRepository carCategoryReportRepository, PartManufacturersReportRepository partManufacturersReportRepository, MostPurchasedPartRepository mostPurchasedPartRepository) {
+                          OrderContainsPartRepository orderContainsPartRepository, OrderService orderService, UserService userService, DeliveriesInProgressRepository deliveriesInProgressRepository, DeliveryService deliveryService, PartIsInStockInWarehouseRepository partIsInStockInWarehouseRepository, CarCategoryReportRepository carCategoryReportRepository, PartManufacturersReportRepository partManufacturersReportRepository, MostPurchasedPartRepository mostPurchasedPartRepository, PriceService priceService) {
         this.loginService = loginService;
         this.partService = partService;
         this.partsForCarTypeAndCategoryRepository = partsForCarTypeAndCategoryRepository;
@@ -57,6 +59,7 @@ public class HomeController {
         this.carCategoryReportRepository = carCategoryReportRepository;
         this.partManufacturersReportRepository = partManufacturersReportRepository;
         this.mostPurchasedPartRepository = mostPurchasedPartRepository;
+        this.priceService = priceService;
     }
 
     @GetMapping()
@@ -89,7 +92,22 @@ public class HomeController {
             Order o = (Order) session.getAttribute("order");
             model.addAttribute("hasError",false);
             model.addAttribute("order",o);
-            model.addAttribute("parts",orderService.findById(o.getOrderid()).getPartList());
+            List<CurrentOrderDTO> list = new ArrayList<>();
+            int total = 0;
+            List<OrderContainsPart> qList = orderContainsPartRepository.findAllByOrderid(o.getOrderid());
+            for (int i = 0; i < qList.size(); i++) {
+                int pr = qList.get(i).getQuantity_order()*
+                        priceService.findPriceForPart(partService.findById(qList.get(i).getPartid())).stream().findFirst().get().getAmount();
+                CurrentOrderDTO temp = new CurrentOrderDTO(
+                        partService.findById(qList.get(i).getPartid()).getName(),
+                        partService.findById(qList.get(i).getPartid()).getManufacturer().getName(),
+                        qList.get(i).getQuantity_order(),
+                        pr);
+                list.add(temp);
+                total+=pr;
+            }
+            model.addAttribute("total",total);
+            model.addAttribute("parts",list);
         }
         model.addAttribute("bodyContent","currentOrder");
         return "master-template";
