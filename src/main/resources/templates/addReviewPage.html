@@ -1,0 +1,17 @@
+<div>
+    <div>
+
+        <form class="form-signin mt-xl-5" method="post" th:action="@{'/repairs/addReview/{id}' (id=${repair.getId()}) }">
+            <h2 class="form-signin-heading">Додај критика</h2>
+            <p>
+                <label for="rating" class="sr-only">Оценка</label>
+                <input type="number" id="rating" name="rating" class="form-control" placeholder="Внеси оценка" required="" autofocus=""/>
+            </p>
+            <p>
+                <label for="comment" class="sr-only">Коментар</label>
+                <input type="text" id="comment" name="comment" class="form-control" placeholder="Внеси коментар"  autofocus=""/>
+            </p>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Поднеси критика</button>
+        </form>
+    </div>
+</div>

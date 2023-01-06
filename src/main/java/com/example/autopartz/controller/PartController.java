@@ -102,10 +102,12 @@ public class PartController {
     @PostMapping("/chooseRepairShop")
     public void chooseRepairShop(@RequestParam Integer rs,HttpSession session, HttpServletResponse response){
         Order o = (Order) session.getAttribute("order");
-        CarSample cs = (CarSample)session.getAttribute("car");
+        CarSample cs = carSampleRepository.findById((Integer)session.getAttribute("carVin")).get();
         ServiceBook sb = serviceBookRepository.findByCarSample(cs);
         RepairShop repairShop = repairShopService.getById(rs);
         repairRepository.save(new Repair(o,repairShop,sb));
+//        o.setOrder_status("finished");
+//        orderService.save(o);
         session.removeAttribute("order");
         try {
             response.sendRedirect("/");
@@ -122,6 +124,8 @@ public class PartController {
         int deliverer =  (int) ((Math.random() * (num)));
         Deliveryman dm = deliverymanList.get(deliverer);
         deliveryRepository.save(new Delivery("in progress",address,dm,o));
+//        o.setOrder_status("finished");
+//        orderService.save(o);
         session.removeAttribute("order");
         try {
             response.sendRedirect("/");

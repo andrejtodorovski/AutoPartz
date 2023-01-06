@@ -3,18 +3,29 @@
 <table>
   <thead>
   <tr>
+    <th>Број на поправка</th>
     <th>Датум на нарачка</th>
-    <th>Нарачан дел</th>
     <th>Број на нарачка</th>
     <th>Име на сервис</th>
+    <th>Додај критика</th>
   </tr>
   </thead>
   <tbody>
   <tr th:each="repair : ${userRepairs}">
+    <td th:text="${repair.getRepairid()}"></td>
     <td th:text="${repair.getOrderdate}"></td>
-    <td th:text="${repair.getPartname()}"></td>
     <td th:text="${repair.getOrderid()}"></td>
     <td th:text="${repair.getRsname()}"></td>
+    <td>
+      <div th:if="${!hasReview.get(repair.getRepairid())}">
+      <form th:action="@{'/repairs/addReview/{id}' (id=${repair.getRepairid()}) }">
+      <button type="submit">Додај критика</button>
+      </form>
+      </div>
+      <div th:if="${hasReview.get(repair.getRepairid())}">
+        Веќе има критика
+      </div>
+    </td>
   </tr>
   </tbody>
 </table>

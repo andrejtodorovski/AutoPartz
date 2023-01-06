@@ -9,5 +9,6 @@ public interface OrderService {
     List<Order> findAll();
     Order create(Client user);
     Order findById(Integer id);
+    void save(Order o);
 }
 

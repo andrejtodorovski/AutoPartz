@@ -6,10 +6,7 @@ import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.Hibernate;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.util.Objects;
 
 @Getter
@@ -19,6 +16,7 @@ import java.util.Objects;
 @Entity
 public class Review {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer ID_review;
     Integer review_rating;
     String review_comment;
@@ -28,6 +26,13 @@ public class Review {
     @ManyToOne
     @JoinColumn(name = "id_user")
     Client client;
+
+    public Review(Integer review_rating, String review_comment, Repair repair, Client client) {
+        this.review_rating = review_rating;
+        this.review_comment = review_comment;
+        this.repair = repair;
+        this.client = client;
+    }
 
     @Override
     public boolean equals(Object o) {

@@ -22,16 +22,13 @@ import java.time.LocalDateTime;
 @RequiredArgsConstructor
 @Immutable
 @Table(name = "`repairs_for_user`")
-@IdClass(OrdersForUserId.class)
 public class RepairsForUser implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
     @Id
+    Integer repairid;
     Integer userid;
-    @Id
     LocalDateTime orderdate;
-    @Id
-    String partname;
     Integer orderid;
     String rsname;
 }

@@ -17,7 +17,8 @@ import java.util.Objects;
 public class Repair {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Integer ID_repair;
+    @Column(name = "ID_repair")
+    Integer id;
     @OneToOne
     @JoinColumn(name = "id_order")
     Order order;
@@ -33,13 +34,12 @@ public class Repair {
         this.repairShop = repairShop;
         this.serviceBook = serviceBook;
     }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
         Repair repair = (Repair) o;
-        return ID_repair != null && Objects.equals(ID_repair, repair.ID_repair);
+        return id != null && Objects.equals(id, repair.id);
     }
 
     @Override
