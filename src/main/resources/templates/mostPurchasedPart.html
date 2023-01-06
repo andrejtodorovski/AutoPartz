@@ -1,0 +1,19 @@
+<div>
+  <h3 class="mt-3 mb-3">Најкупуван производ</h3>
+  <table class="table table-bordered mt-3">
+    <thead class="thead-dark">
+    <tr>
+      <th scope="col">Категорија</th>
+      <th scope="col">Име на делот</th>
+      <th scope="col">Количина</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="d : ${data}">
+      <td th:text="${d.getCmname}"></td>
+      <td th:text="${d.getPname()}"></td>
+      <td th:text="${d.getMaxkol()}"></td>
+    </tr>
+    </tbody>
+  </table>
+</div>

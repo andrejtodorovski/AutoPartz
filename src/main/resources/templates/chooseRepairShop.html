@@ -1,7 +1,7 @@
 <div>
   <h1 th:if="${hasError}" th:text="${error}"></h1>
   <div th:if="${!hasError}">
-  <h3>Достава до овластен сервис</h3>
+  <h3 class="mt-3 mb-3">Достава до овластен сервис</h3>
   <form class="form-signin mt-xl-5" method="post" action="/part/chooseRepairShop">
     <p>
       <label for="rs" class="sr-only">Избор на сервис</label>

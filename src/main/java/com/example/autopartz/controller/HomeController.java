@@ -36,8 +36,11 @@ public class HomeController {
     private final DeliveriesInProgressRepository deliveriesInProgressRepository;
     private final DeliveryService deliveryService;
     private final PartIsInStockInWarehouseRepository partIsInStockInWarehouseRepository;
+    private final CarCategoryReportRepository carCategoryReportRepository;
+    private final PartManufacturersReportRepository partManufacturersReportRepository;
+    private final MostPurchasedPartRepository mostPurchasedPartRepository;
     public HomeController(LoginService loginService, PartService partService, PartsForCarTypeAndCategoryRepository partsForCarTypeAndCategoryRepository, CarService carService, CategoryService categoryService, RepairShopReviewSummaryRepository repairShopReviewSummaryRepository, WarehouseRepository warehouseRepository,
-                          OrderContainsPartRepository orderContainsPartRepository, OrderService orderService, UserService userService, DeliveriesInProgressRepository deliveriesInProgressRepository, DeliveryService deliveryService, PartIsInStockInWarehouseRepository partIsInStockInWarehouseRepository) {
+                          OrderContainsPartRepository orderContainsPartRepository, OrderService orderService, UserService userService, DeliveriesInProgressRepository deliveriesInProgressRepository, DeliveryService deliveryService, PartIsInStockInWarehouseRepository partIsInStockInWarehouseRepository, CarCategoryReportRepository carCategoryReportRepository, PartManufacturersReportRepository partManufacturersReportRepository, MostPurchasedPartRepository mostPurchasedPartRepository) {
         this.loginService = loginService;
         this.partService = partService;
         this.partsForCarTypeAndCategoryRepository = partsForCarTypeAndCategoryRepository;
@@ -51,6 +54,9 @@ public class HomeController {
         this.deliveriesInProgressRepository = deliveriesInProgressRepository;
         this.deliveryService = deliveryService;
         this.partIsInStockInWarehouseRepository = partIsInStockInWarehouseRepository;
+        this.carCategoryReportRepository = carCategoryReportRepository;
+        this.partManufacturersReportRepository = partManufacturersReportRepository;
+        this.mostPurchasedPartRepository = mostPurchasedPartRepository;
     }
 
     @GetMapping()
@@ -228,6 +234,25 @@ public class HomeController {
         model.addAttribute("parts",partList);
         model.addAttribute("o",orderService.findById(id));
         model.addAttribute("bodyContent","orderInfo");
+        return "master-template";
+    }
+    @GetMapping("/carCategoryReport")
+    public String getCarCategoryInfo(Model model){
+        model.addAttribute("data",carCategoryReportRepository.findAll());
+        model.addAttribute("bodyContent","carCategoryReport");
+        return "master-template";
+    }
+    @GetMapping("/partManufacturersReport")
+    public String getPartManufacturersReport(Model model){
+        model.addAttribute("data",partManufacturersReportRepository.findAll());
+        model.addAttribute("bodyContent","partManufacturersReport");
+        return "master-template";
+
+    }
+    @GetMapping("/mostPurchasedPart")
+    public String getMostPurchasedPart(Model model){
+        model.addAttribute("data",mostPurchasedPartRepository.findAll());
+        model.addAttribute("bodyContent","mostPurchasedPart");
         return "master-template";
     }
 }

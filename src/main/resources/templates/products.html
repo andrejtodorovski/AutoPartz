@@ -1,12 +1,5 @@
 <div xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 >
-<header>
-    <th:block sec:authorize="hasAuthority('ROLE_CLIENT')">
-    <a th:href="${'/orders'}">Мои нарачки</a>
-    <a th:href="${'/repairs'}">Мои поправки</a>
-    <a th:href="${'/reviews'}">Мои критики</a>
-    </th:block>
-</header>
 <main>
     <h1 class="mt-3 mb-3">Сите производи</h1>
     <form th:action="@{/filtered}">

@@ -1,0 +1,23 @@
+<div>
+  <h3 class="mt-3 mb-3">Извештај за производителите на авто делови, колку делови од тој производител се продаваат за секоја четвртина од минатата година</h3>
+  <table class="table table-bordered mt-3">
+    <thead class="thead-dark">
+    <tr>
+      <th scope="col">Производител на делови</th>
+      <th scope="col">Прва четвртина</th>
+      <th scope="col">Втора четвртина</th>
+      <th scope="col">Трета четвртина</th>
+      <th scope="col">Четврта четвртина</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="d : ${data}">
+      <td th:text="${d.getPmname}"></td>
+      <td th:text="${d.getPrva()}"></td>
+      <td th:text="${d.getVtora()}"></td>
+      <td th:text="${d.getTreta()}"></td>
+      <td th:text="${d.getCetvrta()}"></td>
+    </tr>
+    </tbody>
+  </table>
+</div>

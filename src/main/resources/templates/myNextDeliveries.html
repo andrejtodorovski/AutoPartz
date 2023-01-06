@@ -1,9 +1,9 @@
 <div>
-  <h1>Мои следни нарачки</h1>
+  <h1 class="mb-3 mt-3">Мои следни нарачки</h1>
   <h1 th:if="${hasError}" th:text="${error}"></h1>
   <div th:if="${!hasError}">
-  <table>
-    <thead>
+  <table class="table table-bordered">
+    <thead class="thead-dark">
     <tr>
       <th>Статус на достава</th>
       <th>Адреса на достава</th>

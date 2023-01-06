@@ -1,0 +1,19 @@
+<div>
+  <h3 class="mt-3 mb-3">Извештај за сите категории и за кој прозиводител на коли биле купени највеќе делови од таа категорија</h3>
+  <table class="table table-bordered mt-3">
+    <thead class="thead-dark">
+    <tr>
+      <th scope="col">Категорија</th>
+      <th scope="col">Производител на кола</th>
+      <th scope="col">Број на делови</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="d : ${data}">
+      <td th:text="${d.getCname}"></td>
+      <td th:text="${d.getCmname()}"></td>
+      <td th:text="${d.getPartsordered()}"></td>
+    </tr>
+    </tbody>
+  </table>
+</div>

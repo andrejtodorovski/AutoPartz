@@ -9,16 +9,25 @@
 
       <div class="collapse navbar-collapse justify-content-end" id="navbarsExampleDefault">
         <ul class="navbar-nav m-auto">
-          <li class="nav-item m-auto">
-            <a class="nav-link active" href="/products">Продукти</a>
-          </li>
-          <li class="nav-item m-auto">
-            <a class="nav-link active" href="/services">Сервиси</a>
-          </li>
           <th:block sec:authorize="hasAuthority('ROLE_CLIENT')">
           <li class="nav-item m-auto">
             <a class="nav-link active" href="/currentOrder">Моја нарачка</a>
           </li>
+          </th:block>
+          <th:block sec:authorize="hasAuthority('ROLE_CLIENT')">
+            <li class="nav-item m-auto">
+              <a class="nav-link active" href="/orders">Мои нарачки</a>
+            </li>
+          </th:block>
+          <th:block sec:authorize="hasAuthority('ROLE_CLIENT')">
+            <li class="nav-item m-auto">
+              <a class="nav-link active" href="/repairs">Мои поправки</a>
+            </li>
+          </th:block>
+          <th:block sec:authorize="hasAuthority('ROLE_CLIENT')">
+            <li class="nav-item m-auto">
+              <a class="nav-link active" href="/reviews">Мои критики</a>
+            </li>
           </th:block>
           <th:block sec:authorize="hasAuthority('ROLE_CLIENT')">
             <li class="nav-item m-auto">
@@ -45,7 +54,7 @@
         <ul class="nav navbar-nav navbar-right">
           <th:block th:if="${#request.getRemoteUser() != null}">
           <li class="nav-item">
-            <a class="btn btn-success btn-sm ml-3" href="/register">
+            <a class="btn btn-success btn-sm ml-3" href="/">
               <th:block th:text="${#request.getRemoteUser()}"></th:block>
             </a>
           </li>

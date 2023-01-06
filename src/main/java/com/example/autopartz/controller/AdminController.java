@@ -36,7 +36,13 @@ public class AdminController {
     @GetMapping("/viewUsers")
     public String getAllUsers(Model model){
         List<User> pendingList = userService.findAllUsers().stream().filter(u->u.getAuthorities().contains(Role.ROLE_PENDING_DELIVERYMAN) || u.getAuthorities().contains(Role.ROLE_PENDING_WAREHOUSEMAN)).toList();
-        model.addAttribute("users", pendingList);
+        if(pendingList.size()==0){
+            model.addAttribute("hasError",true);
+        }
+        else {
+            model.addAttribute("hasError",false);
+            model.addAttribute("users", pendingList);
+        }
         model.addAttribute("bodyContent", "viewUsers");
         return "master-template";
     }
