@@ -12,18 +12,22 @@
     <button class="btn btn-lg btn-primary btn-block" type="submit">Достава до дома</button>
   </form>
   <h3>Достава до овластен сервис</h3>
+  <h1 th:if="${hasError}" th:text="${error}"></h1>
+  <div th:if="${!hasError}">
   <form class="form-signin mt-xl-5" method="post" action="/part/repairshopdelivery">
     <p>
-      <label for="repairShop" class="sr-only">Избор на овластен сервис</label>
-      <select id="repairShop" required name="name">
-        <option  th:each="rs : ${repairShops}"
-                 th:text="${rs.getName()}"
-                 th:value="${rs.getId()}">
+      <span>Избор на некоја од твоите коли</span>
+      <label for="vin" class="sr-only">Избор на некоја од твоите коли</label>
+      <select id="vin" required name="vin">
+        <option  th:each="car : ${cars}"
+                 th:text="${car.getCar().getCartype()}"
+                 th:value="${car.getVin()}">
         </option>
       </select>
     </p>
-    <button class="btn btn-lg btn-primary btn-block" type="submit">Достава до сервис</button>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Следно</button>
   </form>
+  </div>
 </main>
 
 </div>

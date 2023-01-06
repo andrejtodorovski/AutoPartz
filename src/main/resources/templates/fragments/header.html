@@ -20,6 +20,11 @@
             <a class="nav-link active" href="/currentOrder">Моја нарачка</a>
           </li>
           </th:block>
+          <th:block sec:authorize="hasAuthority('ROLE_CLIENT')">
+            <li class="nav-item m-auto">
+              <a class="nav-link active" href="/addCarSampleForUser">Додај примерок од кола</a>
+            </li>
+          </th:block>
           <th:block sec:authorize="hasAuthority('ROLE_WAREHOUSEMAN')">
             <li class="nav-item m-auto">
               <a class="nav-link active" href="/myWarehouse">Мој магацин</a>

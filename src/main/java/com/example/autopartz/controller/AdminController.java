@@ -1,8 +1,10 @@
 package com.example.autopartz.controller;
 
+import com.example.autopartz.model.Deliveryman;
 import com.example.autopartz.model.Role;
 import com.example.autopartz.model.User;
 import com.example.autopartz.model.Warehouseman;
+import com.example.autopartz.repository.DeliverymanRepository;
 import com.example.autopartz.repository.WarehousemanRepository;
 import com.example.autopartz.service.UserService;
 import org.springframework.stereotype.Controller;
@@ -12,7 +14,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import javax.annotation.security.RolesAllowed;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.time.LocalDate;
@@ -24,10 +25,12 @@ import java.util.Objects;
 public class AdminController {
     private final UserService userService;
     private final WarehousemanRepository warehousemanRepository;
+    private final DeliverymanRepository deliverymanRepository;
 
-    public AdminController(UserService userService, WarehousemanRepository warehousemanRepository) {
+    public AdminController(UserService userService, WarehousemanRepository warehousemanRepository, DeliverymanRepository deliverymanRepository) {
         this.userService = userService;
         this.warehousemanRepository = warehousemanRepository;
+        this.deliverymanRepository = deliverymanRepository;
     }
 
     @GetMapping("/viewUsers")
@@ -43,6 +46,12 @@ public class AdminController {
             Warehouseman wh = (Warehouseman) userService.findById(id);
             wh.setEmployed_from(LocalDate.now());
             warehousemanRepository.save(wh);
+
+        }
+        else {
+            Deliveryman dm = (Deliveryman) userService.findById(id);
+            dm.setEmployed_from(LocalDate.now());
+            deliverymanRepository.save(dm);
             try {
                 response.sendRedirect("/viewUsers");
             } catch (IOException e) {

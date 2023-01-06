@@ -16,6 +16,7 @@ import java.util.Objects;
 @Entity
 public class Repair {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer ID_repair;
     @OneToOne
     @JoinColumn(name = "id_order")
@@ -26,6 +27,12 @@ public class Repair {
     @ManyToOne
     @JoinColumn(name = "id_service_book")
     ServiceBook serviceBook;
+
+    public Repair(Order order, RepairShop repairShop, ServiceBook serviceBook) {
+        this.order = order;
+        this.repairShop = repairShop;
+        this.serviceBook = serviceBook;
+    }
 
     @Override
     public boolean equals(Object o) {

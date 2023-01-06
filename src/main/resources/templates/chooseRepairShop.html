@@ -1,0 +1,18 @@
+<div>
+  <h1 th:if="${hasError}" th:text="${error}"></h1>
+  <div th:if="${!hasError}">
+  <h3>Достава до овластен сервис</h3>
+  <form class="form-signin mt-xl-5" method="post" action="/part/chooseRepairShop">
+    <p>
+      <label for="rs" class="sr-only">Избор на сервис</label>
+      <select id="rs" required name="rs">
+        <option  th:each="aut : ${authorized}"
+                 th:text="${aut.getName()}"
+                 th:value="${aut.getId()}">
+        </option>
+      </select>
+    </p>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Достава до сервис</button>
+  </form>
+  </div>
+</div>

@@ -18,18 +18,25 @@ import java.util.Objects;
 @Table(name = "service_book")
 public class ServiceBook {
     @Id
-    Integer ID_service_book;
+    @Column(name = "ID_service_book")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    Integer id;
     LocalDateTime sb_created_on;
     @OneToOne
     @JoinColumn(name = "vin")
     CarSample carSample;
+
+    public ServiceBook(CarSample carSample) {
+        this.sb_created_on = LocalDateTime.now();
+        this.carSample = carSample;
+    }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
         ServiceBook that = (ServiceBook) o;
-        return ID_service_book != null && Objects.equals(ID_service_book, that.ID_service_book);
+        return id != null && Objects.equals(id, that.id);
     }
 
     @Override

@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface RepairShopService {
     List<RepairShop> findAll();
+    RepairShop getByName(String name);
+    RepairShop getById(Integer id);
 }

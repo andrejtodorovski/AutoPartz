@@ -17,7 +17,8 @@ import java.util.Objects;
 @Table(name = "car")
 public class Car {
     @Id
-    Integer ID_car;
+    @Column(name = "ID_car")
+    Integer id;
     Integer in_production_since;
     Integer in_production_till;
     @Column(name = "car_type")
@@ -31,7 +32,7 @@ public class Car {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
         Car car = (Car) o;
-        return ID_car != null && Objects.equals(ID_car, car.ID_car);
+        return id != null && Objects.equals(id, car.id);
     }
 
     @Override

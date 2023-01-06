@@ -1,0 +1,45 @@
+<div>
+  <form class="form-signin mt-xl-5" method="post" action="/addCarSampleForUser">
+    <h2 class="form-signin-heading">Додај ја својата кола</h2>
+    <p>
+      <label for="vin" class="sr-only">Број на шасија</label>
+      <input type="number" id="vin" name="vin" class="form-control" placeholder="Внеси го бројот на шасија" required="" autofocus=""/>
+    </p>
+    <p>
+      <label for="year" class="sr-only">Година на производство</label>
+      <input type="number" id="year" name="year" class="form-control" placeholder="Внеси ја годината на производство" required="" autofocus=""/>
+    </p>
+    <p>
+      <label for="power" class="sr-only">Јачина на мотор</label>
+      <input type="number" id="power" name="power" class="form-control" placeholder="Внеси јачина на мотор" required="" autofocus=""/>
+    </p>
+    <p>
+      <label for="displacement" class="sr-only">Зафатнина</label>
+      <input type="number" id="displacement" name="displacement" class="form-control" placeholder="Внеси зафатнина" required=""/>
+    </p>
+    <p>
+      <label for="fuel" class="sr-only">
+        Одбери тип на гориво
+      </label><select class="form-control" id="fuel" name="fuel" required>
+      <option value="Petrol">Petrol</option>
+      <option value="Diesel">Diesel</option>
+      <option value="Petrol/Gas">Petrol/Gas</option>
+    </select>
+    </p>
+    <p>
+      <label for="km" class="sr-only">Поминати километри</label>
+      <input type="number" id="km" name="km" class="form-control" placeholder="Додај поминати километри.." required=""/>
+    </p>
+    <p>
+      <label for="cartype" class="sr-only">
+        Одбери од кој тип на кола
+      </label><select class="form-control" id="cartype" name="cartype" required>
+      <option  th:each="car : ${cars}"
+               th:text="${car.getCartype()}"
+               th:value="${car.getId()}">
+      </option>
+    </select>
+    </p>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Додај кола</button>
+  </form>
+</div>

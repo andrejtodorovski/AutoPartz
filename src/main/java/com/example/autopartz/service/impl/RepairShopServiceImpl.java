@@ -19,4 +19,14 @@ public class RepairShopServiceImpl implements RepairShopService {
     public List<RepairShop> findAll() {
         return repairShopRepository.findAll();
     }
+
+    @Override
+    public RepairShop getByName(String name) {
+        return repairShopRepository.getRepairShopByName(name);
+    }
+
+    @Override
+    public RepairShop getById(Integer id) {
+        return repairShopRepository.findById(id).get();
+    }
 }

@@ -16,6 +16,7 @@ import java.util.Objects;
 @RequiredArgsConstructor
 public class Delivery {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer ID_delivery;
     @Column(name = "delivery_status")
     String status;
@@ -27,6 +28,13 @@ public class Delivery {
     @JoinColumn(name = "id_order")
     @OneToOne
     Order order;
+
+    public Delivery(String status, String address, Deliveryman deliveryman, Order order) {
+        this.status = status;
+        this.address = address;
+        this.deliveryman = deliveryman;
+        this.order = order;
+    }
 
     @Override
     public boolean equals(Object o) {
