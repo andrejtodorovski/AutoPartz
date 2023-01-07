@@ -128,6 +128,10 @@ public class HomeController {
             model.addAttribute("hasError",false);
             model.addAttribute("filtered", tmp);
         }
+        model.addAttribute("selectedCar","Previously selected : "+cartype);
+        model.addAttribute("selectedCategory","Previously selected : " + category);
+        model.addAttribute("cars",carService.findAll());
+        model.addAttribute("categories",categoryService.findAll());
         model.addAttribute("bodyContent","filteredParts");
         return "master-template";
     }

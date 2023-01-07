@@ -1,6 +1,23 @@
 <div>
 <h1 class="mt-3 mb-3">Резултат од филтерот</h1>
 <a th:href="${'/products'}">Врати се на сите производи</a>
+<form th:action="@{/filtered}">
+    <label for="cartype"></label><select id="cartype" class="form-control w-25 d-inline mr-3" required name="cartype">
+    <option value="" disabled selected th:text="${selectedCar}"></option>
+    <option  th:each="car : ${cars}"
+             th:text="${car.getCartype()}"
+             th:value="${car.getCartype()}">
+    </option>
+</select>
+    <label for="category"></label><select id="category" class="form-control w-25 d-inline mr-3" required name="category">
+    <option value="" disabled selected th:text="${selectedCategory}"></option>
+    <option  th:each="cat : ${categories}"
+             th:text="${cat.getCname()}"
+             th:value="${cat.getCname()}">
+    </option>
+</select>
+    <button class="btn btn-lg btn-block btn-primary w-25 d-inline" type="submit">Филтрирај</button>
+</form>
     <h3 th:if="${hasError}" th:text="${error}"></h3>
     <div th:if="${!hasError}">
 <table class="table table-bordered mt-3">
