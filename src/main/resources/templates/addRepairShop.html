@@ -1,0 +1,27 @@
+<div>
+  <form class="form-signin mt-xl-4" method="post" action="/addRepairShop">
+    <h2 class="form-signin-heading mb-3">Додај сервис</h2>
+    <p>
+      <label for="name" class="sr-only">Име на сервис</label>
+      <input type="text" id="name" name="name" class="form-control" placeholder="Внеси го името на сервисот..." required="" autofocus=""/>
+    </p>
+    <p>
+      <label for="location" class="sr-only">Локација на сервис</label>
+      <input type="text" id="location" name="location" class="form-control" placeholder="Внеси локација..." required="" autofocus=""/>
+    </p>
+    <p>
+      <label for="number" class="sr-only">Телефонски број</label>
+      <input type="text" id="number" name="number" class="form-control" placeholder="Внеси телефонски број..." required="" autofocus=""/>
+    </p>
+    <p>
+      Овластен за :
+      <label for="carMId"></label><select id="carMId" class="form-control w-25 d-inline mr-3" required name="carMId">
+      <option  th:each="cm : ${manufacturers}"
+               th:text="${cm.getCmname()}"
+               th:value="${cm.getId()}">
+      </option>
+    </select>
+    </p>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Додај сервис</button>
+  </form>
+</div>

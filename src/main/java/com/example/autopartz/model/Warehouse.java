@@ -6,9 +6,7 @@ import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.Hibernate;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Objects;
 
 @Getter
@@ -19,9 +17,14 @@ import java.util.Objects;
 public class Warehouse {
     @Id
     @Column(name = "id_warehouse")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer id;
     @Column(name = "warehouse_location")
     String location;
+
+    public Warehouse(String name) {
+        this.location = name;
+    }
 
     @Override
     public boolean equals(Object o) {

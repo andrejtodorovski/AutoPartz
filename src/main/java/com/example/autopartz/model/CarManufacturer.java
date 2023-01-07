@@ -6,9 +6,7 @@ import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.Hibernate;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Objects;
 
 @Getter
@@ -19,16 +17,24 @@ import java.util.Objects;
 @Table(name = "car_manufacturer", schema = "project")
 public class CarManufacturer {
     @Id
-    Integer ID_car_manufacturer;
-    String cm_name;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_car_manufacturer")
+    Integer id;
+    @Column(name = "cm_name")
+    String cmname;
     String cm_country;
+
+    public CarManufacturer(String cmname, String cm_country) {
+        this.cmname = cmname;
+        this.cm_country = cm_country;
+    }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
         CarManufacturer that = (CarManufacturer) o;
-        return ID_car_manufacturer != null && Objects.equals(ID_car_manufacturer, that.ID_car_manufacturer);
+        return id != null && Objects.equals(id, that.id);
     }
 
     @Override

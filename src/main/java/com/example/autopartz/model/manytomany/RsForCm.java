@@ -21,4 +21,9 @@ public class RsForCm {
     @Column(name = "id_car_manufacturer")
     @Id
     Integer cmid;
+
+    public RsForCm(Integer rsid, Integer cmid) {
+        this.rsid = rsid;
+        this.cmid = cmid;
+    }
 }

@@ -29,7 +29,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/", "/products", "/services", "/filtered", "/login", "/register","/registerWarehouseman","/finishRegister","/test/*","/access_denied","/carCategoryReport","/partManufacturersReport","/mostPurchasedPart").permitAll()
                 .antMatchers("/orders","/repairs","/reviews","/part/*","/currentOrder","/addCarSampleForUser","/repairs/addReview/*").hasRole("CLIENT")
-                .antMatchers("/viewUsers","/approve/*","/addPart").hasRole("ADMIN")
+                .antMatchers("/viewUsers","/approve/*","/addPart","/addCarManufacturer","/addPartManufacturer","/addCategory","/addCar","/addRepairShop","/addWarehouse").hasRole("ADMIN")
                 .antMatchers("/myWarehouseReport","myWarehouse").hasRole("WAREHOUSEMAN")
                 .anyRequest()
                 .authenticated()

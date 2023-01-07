@@ -88,7 +88,7 @@ public class PartController {
         else {
             model.addAttribute("hasError", false);
             CarSample cs = carSampleRepository.findById((Integer) session.getAttribute("carVin")).get();
-            Integer idCM = cs.getCar().getCar_manufacturer().getID_car_manufacturer();
+            Integer idCM = cs.getCar().getCar_manufacturer().getId();
             List<RsForCm> rsForCm = rsForCmRepository.findAllByCmid(idCM);
             List<RepairShop> newRepairShopList = new ArrayList<>();
             for (RsForCm forCm : rsForCm) {

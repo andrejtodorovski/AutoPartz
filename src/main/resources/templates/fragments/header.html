@@ -56,7 +56,37 @@
           </th:block>
           <th:block sec:authorize="hasAuthority('ROLE_ADMIN')">
             <li class="nav-item m-auto">
-              <a class="nav-link active" href="/addPart">Додај дел во системот</a>
+              <a class="nav-link active" href="/addPart">Додај дел</a>
+            </li>
+          </th:block>
+          <th:block sec:authorize="hasAuthority('ROLE_ADMIN')">
+            <li class="nav-item m-auto">
+              <a class="nav-link active" href="/addCarManufacturer">Додај производител на коли</a>
+            </li>
+          </th:block>
+          <th:block sec:authorize="hasAuthority('ROLE_ADMIN')">
+            <li class="nav-item m-auto">
+              <a class="nav-link active" href="/addPartManufacturer">Додај производител на дел</a>
+            </li>
+          </th:block>
+          <th:block sec:authorize="hasAuthority('ROLE_ADMIN')">
+            <li class="nav-item m-auto">
+              <a class="nav-link active" href="/addWarehouse">Додај магацин</a>
+            </li>
+          </th:block>
+          <th:block sec:authorize="hasAuthority('ROLE_ADMIN')">
+            <li class="nav-item m-auto">
+              <a class="nav-link active" href="/addCar">Додај кола</a>
+            </li>
+          </th:block>
+          <th:block sec:authorize="hasAuthority('ROLE_ADMIN')">
+            <li class="nav-item m-auto">
+              <a class="nav-link active" href="/addRepairShop">Додај сервис</a>
+            </li>
+          </th:block>
+          <th:block sec:authorize="hasAuthority('ROLE_ADMIN')">
+            <li class="nav-item m-auto">
+              <a class="nav-link active" href="/addCategory">Додај категорија</a>
             </li>
           </th:block>
         </ul>

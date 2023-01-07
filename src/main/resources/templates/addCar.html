@@ -1,0 +1,28 @@
+<div>
+  <form class="form-signin mt-xl-4" method="post" action="/addCar">
+    <h2 class="form-signin-heading mb-3">Додај кола</h2>
+    <p>
+      <label for="since" class="sr-only">Година на почеток на производство</label>
+      <input type="number" id="since" name="since" min="1900" max="2022" class="form-control" placeholder="Внеси година..." required="" autofocus=""/>
+    </p>
+    <p>
+      <label for="till" class="sr-only">Година на крај на производство</label>
+      <input type="number" min="1900" max="2022" id="till" name="till" class="form-control" placeholder="Внеси година..." required="" autofocus=""/>
+    </p>
+    <p>
+      <label for="name" class="sr-only">Име на кола</label>
+      <input type="text" id="name" name="name" class="form-control" placeholder="Внеси име на кола..." required="" autofocus=""/>
+    </p>
+    <p>
+      <label for="mId">
+        <select id="mId" class="form-control d-inline mr-3" required name="mId">
+        <option  th:each="m : ${manufacturers}"
+                 th:text="${m.getCmname()}"
+                 th:value="${m.getId()}">
+        </option>
+      </select>
+      </label>
+    </p>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Додај кола</button>
+  </form>
+</div>

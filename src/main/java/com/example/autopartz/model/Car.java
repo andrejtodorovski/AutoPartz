@@ -17,6 +17,7 @@ import java.util.Objects;
 @Table(name = "car")
 public class Car {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID_car")
     Integer id;
     Integer in_production_since;
@@ -26,6 +27,13 @@ public class Car {
     @ManyToOne
     @JoinColumn(name = "id_car_manufacturer")
     CarManufacturer car_manufacturer;
+
+    public Car(Integer in_production_since, Integer in_production_till, String cartype, CarManufacturer car_manufacturer) {
+        this.in_production_since = in_production_since;
+        this.in_production_till = in_production_till;
+        this.cartype = cartype;
+        this.car_manufacturer = car_manufacturer;
+    }
 
     @Override
     public boolean equals(Object o) {

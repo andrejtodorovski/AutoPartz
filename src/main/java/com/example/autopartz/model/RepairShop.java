@@ -19,6 +19,7 @@ import java.util.Objects;
 public class RepairShop {
     @Id
     @Column(name = "ID_repair_shop")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer id;
     @Column(name = "rs_name")
     String name;
@@ -32,6 +33,13 @@ public class RepairShop {
             inverseJoinColumns = @JoinColumn(name = "id_car_manufacturer"))
     @ToString.Exclude
     List<CarManufacturer> carManufacturerList;
+
+    public RepairShop(String name, String location, String number, List<CarManufacturer> carManufacturerList) {
+        this.name = name;
+        this.location = location;
+        this.number = number;
+        this.carManufacturerList = carManufacturerList;
+    }
 
     @Override
     public boolean equals(Object o) {

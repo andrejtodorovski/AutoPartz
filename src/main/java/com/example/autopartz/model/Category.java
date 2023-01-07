@@ -17,12 +17,17 @@ import java.util.Objects;
 public class Category {
     @Id
     @Column(name = "id_category")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer id;
     @Column(name = "category_name")
     String cname;
     @ManyToOne
     @JoinColumn(name = "id_parent_category")
     Category ID_parent_category;
+
+    public Category(String category) {
+        this.cname = category;
+    }
 
     @Override
     public boolean equals(Object o) {
