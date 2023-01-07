@@ -50,6 +50,8 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
+            <version>1.18.24</version>
+            <scope>provided</scope>
             <optional>true</optional>
         </dependency>
         <dependency>
@@ -76,6 +78,15 @@
                             <artifactId>lombok</artifactId>
                         </exclude>
                     </excludes>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>com.google.cloud.tools</groupId>
+                <artifactId>appengine-maven-plugin</artifactId>
+                <version>2.2.0</version>
+                <configuration>
+                    <version>1</version>
+                    <projectId>GCLOUD_CONFIG</projectId>
                 </configuration>
             </plugin>
         </plugins>
