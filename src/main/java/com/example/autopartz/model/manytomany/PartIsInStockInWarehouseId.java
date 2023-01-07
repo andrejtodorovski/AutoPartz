@@ -8,4 +8,12 @@ import java.io.Serializable;
 public class PartIsInStockInWarehouseId implements Serializable {
     Integer partid;
     Integer warehouseid;
+
+    public PartIsInStockInWarehouseId(Integer pId, Integer whId) {
+        this.partid = pId;
+        this.warehouseid = whId;
+    }
+
+    public PartIsInStockInWarehouseId() {
+    }
 }

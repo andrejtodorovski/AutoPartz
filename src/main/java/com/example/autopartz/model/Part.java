@@ -17,6 +17,7 @@ import java.util.Objects;
 @Entity
 public class Part {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID_part")
     Integer id;
     @Column(name = "part_name")
@@ -44,6 +45,15 @@ public class Part {
             inverseJoinColumns = @JoinColumn(name = "id_car"))
     @ToString.Exclude
     List<Car> carList;
+
+    public Part(String name, String description, PartManufacturer manufacturer, List<Category> categoryList, List<Warehouse> warehouseList, List<Car> carList) {
+        this.name = name;
+        this.description = description;
+        this.manufacturer = manufacturer;
+        this.categoryList = categoryList;
+        this.warehouseList = warehouseList;
+        this.carList = carList;
+    }
 
     @Override
     public boolean equals(Object o) {

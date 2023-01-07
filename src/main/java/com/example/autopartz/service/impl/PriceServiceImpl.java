@@ -21,4 +21,9 @@ public class PriceServiceImpl implements PriceService {
     public List<Price> findPriceForPart(Part part) {
         return priceRepository.findAllByPart(part);
     }
+
+    @Override
+    public void save(Price p) {
+        priceRepository.save(p);
+    }
 }

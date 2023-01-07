@@ -10,7 +10,7 @@
     </thead>
     <tbody>
     <tr th:each="d : ${data}">
-      <td th:text="${d.getCname}"></td>
+      <td th:text="${d.getCname()}"></td>
       <td th:text="${d.getCmname()}"></td>
       <td th:text="${d.getPartsordered()}"></td>
     </tr>

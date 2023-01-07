@@ -1,0 +1,33 @@
+<div>
+  <table class="table table-bordered mt-3">
+    <thead class="thead-dark">
+    <tr>
+      <th scope="col">Магацин</th>
+      <th scope="col">Име на дел</th>
+      <th scope="col">Моментално нарачани</th>
+      <th scope="col">Моментално достапни</th>
+      <th scope="col">Потрошени во последните 3 месеци</th>
+      <th scope="col">Дали треба да се нарача?</th>
+      <th scope="col">Нарачај</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="d : ${data}">
+      <td th:text="${d.getWid()}"></td>
+      <td th:text="${d.getPname()}"></td>
+      <td th:text="${d.getQuantityordered()}"></td>
+      <td th:text="${d.getQuantitywarehouse()}"></td>
+      <td th:text="${d.getQuantitylast3months()}"></td>
+      <td th:text="${d.getHasenoughinstock()}"></td>
+      <td>
+        <form method="post" th:action="@{'/myWarehouse/{pname}' (pname=${d.getPname()}) }">
+          <label for="quantity">
+            <input type="number" id="quantity" class="form-control" min="1" required name="quantity" placeholder="Количина">
+          </label>
+          <button class="btn btn-primary btn-block btn-lg" type="submit">Нарачај</button>
+        </form>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>

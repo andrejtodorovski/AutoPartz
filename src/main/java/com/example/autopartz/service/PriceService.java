@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface PriceService {
     List<Price> findPriceForPart(Part part);
+    void save(Price p);
 }

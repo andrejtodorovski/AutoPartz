@@ -39,6 +39,11 @@
               <a class="nav-link active" href="/myWarehouse">Мој магацин</a>
             </li>
           </th:block>
+          <th:block sec:authorize="hasAuthority('ROLE_WAREHOUSEMAN')">
+            <li class="nav-item m-auto">
+              <a class="nav-link active" href="/myWarehouseReport">Информации за потреби</a>
+            </li>
+          </th:block>
           <th:block sec:authorize="hasAuthority('ROLE_DELIVERYMAN')">
             <li class="nav-item m-auto">
               <a class="nav-link active" href="/myDeliveries">Мои достави</a>
@@ -47,6 +52,11 @@
           <th:block sec:authorize="hasAuthority('ROLE_ADMIN')">
             <li class="nav-item m-auto">
               <a class="nav-link active" href="/viewUsers">Корисници</a>
+            </li>
+          </th:block>
+          <th:block sec:authorize="hasAuthority('ROLE_ADMIN')">
+            <li class="nav-item m-auto">
+              <a class="nav-link active" href="/addPart">Додај дел во системот</a>
             </li>
           </th:block>
         </ul>

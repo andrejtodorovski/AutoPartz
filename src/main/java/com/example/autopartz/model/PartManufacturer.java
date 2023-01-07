@@ -20,7 +20,8 @@ import java.util.Objects;
 @Table(name = "part_manufacturer")
 public class PartManufacturer {
     @Id
-    Integer ID_part_manufacturer;
+    @Column(name = "id_part_manufacturer")
+    Integer id;
     @Column(name = "pm_name")
     String name;
     String pm_location;
@@ -30,7 +31,7 @@ public class PartManufacturer {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
         PartManufacturer that = (PartManufacturer) o;
-        return ID_part_manufacturer != null && Objects.equals(ID_part_manufacturer, that.ID_part_manufacturer);
+        return id != null && Objects.equals(id, that.id);
     }
 
     @Override

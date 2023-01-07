@@ -1,9 +1,6 @@
 package com.example.autopartz.model.manytomany;
 
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -11,7 +8,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @ToString
-@RequiredArgsConstructor
+@NoArgsConstructor
 @Table(name = "`part_is_in_stock_in_warehouse`")
 @IdClass(PartIsInStockInWarehouseId.class)
 public class PartIsInStockInWarehouse {
@@ -23,4 +20,10 @@ public class PartIsInStockInWarehouse {
     Integer warehouseid;
     @Column(name = "quantity_warehouse")
     Integer quantity;
+
+    public PartIsInStockInWarehouse(Integer partid, Integer warehouseid, Integer quantity) {
+        this.partid = partid;
+        this.warehouseid = warehouseid;
+        this.quantity = quantity;
+    }
 }

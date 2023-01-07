@@ -18,7 +18,8 @@ import java.util.Objects;
 @Entity
 public class Warehouse {
     @Id
-    Integer ID_warehouse;
+    @Column(name = "id_warehouse")
+    Integer id;
     @Column(name = "warehouse_location")
     String location;
 
@@ -27,7 +28,7 @@ public class Warehouse {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
         Warehouse warehouse = (Warehouse) o;
-        return ID_warehouse != null && Objects.equals(ID_warehouse, warehouse.ID_warehouse);
+        return id != null && Objects.equals(id, warehouse.id);
     }
 
     @Override

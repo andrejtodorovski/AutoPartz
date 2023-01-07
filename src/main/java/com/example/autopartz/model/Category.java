@@ -16,7 +16,8 @@ import java.util.Objects;
 @Entity
 public class Category {
     @Id
-    Integer ID_category;
+    @Column(name = "id_category")
+    Integer id;
     @Column(name = "category_name")
     String cname;
     @ManyToOne
@@ -28,7 +29,7 @@ public class Category {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
         Category category = (Category) o;
-        return ID_category != null && Objects.equals(ID_category, category.ID_category);
+        return id != null && Objects.equals(id, category.id);
     }
 
     @Override
