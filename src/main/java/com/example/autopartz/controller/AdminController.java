@@ -74,6 +74,11 @@ public class AdminController {
             Warehouseman wh = (Warehouseman) userService.findById(id);
             wh.setEmployed_from(LocalDate.now());
             warehousemanRepository.save(wh);
+            try {
+                response.sendRedirect("/viewUsers");
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
 
         }
         else {
