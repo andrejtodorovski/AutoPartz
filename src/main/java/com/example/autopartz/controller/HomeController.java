@@ -19,8 +19,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/")
@@ -219,6 +221,7 @@ public class HomeController {
     public String myDeliveries(Model model, HttpServletRequest request){
         Deliveryman dm = (Deliveryman) userService.findByUsername(request.getRemoteUser());
         List<Delivery> deliveries = deliveryService.findAllByDeliverer(dm);
+        deliveries = deliveries.stream().sorted((p1,p2)->p2.getOrder().getDate().compareTo(p1.getOrder().getDate())).collect(Collectors.toList());
         model.addAttribute("bodyContent","myDeliveries");
         model.addAttribute("deliveries",deliveries);
         return "master-template";

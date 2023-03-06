@@ -49,6 +49,16 @@
               <a class="nav-link active" href="/myDeliveries">Мои достави</a>
             </li>
           </th:block>
+          <th:block sec:authorize="hasAuthority('ROLE_PENDING_DELIVERYMAN')">
+            <li class="nav-item m-auto text-white">
+              Чека одобрување од администратор
+            </li>
+          </th:block>
+          <th:block sec:authorize="hasAuthority('ROLE_PENDING_WAREHOUSEMAN')">
+            <li class="nav-item m-auto text-white">
+              Чека одобрување од администратор
+            </li>
+          </th:block>
           <th:block sec:authorize="hasAuthority('ROLE_ADMIN')">
             <li class="nav-item m-auto">
               <a class="nav-link active" href="/viewUsers">Корисници</a>
