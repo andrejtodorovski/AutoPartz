@@ -21,31 +21,31 @@
     </p>
     <p>
       <label for="cars">Соодветно за</label>
-<!--      <select class="form-control" id="cars" name="cars" required multiple="multiple">-->
-<!--        <option  th:each="c : ${cars}"-->
-<!--                 th:text="${c.getCartype()}"-->
-<!--                 th:value="${c.getId()}">-->
-<!--        </option>-->
-<!--      </select>-->
-        <input type="checkbox" name="cars" id="cars"
-               th:each="c : ${cars}"
-               th:text="${c.getCartype()}"
-               th:value="${c.getId()}"
-        />
+      <select class="form-control" id="cars" name="cars" required multiple="multiple">
+        <option  th:each="c : ${cars}"
+                 th:text="${c.getCartype()}"
+                 th:value="${c.getId()}">
+        </option>
+      </select>
+<!--        <input type="checkbox" name="cars" id="cars"-->
+<!--               th:each="c : ${cars}"-->
+<!--               th:text="${c.getCartype()}"-->
+<!--               th:value="${c.getId()}"-->
+<!--        />-->
     </p>
     <p>
       <label for="categories">Во категории</label>
-<!--      <select class="form-control" id="categories" name="categories" required multiple="multiple">-->
-<!--        <option  th:each="c : ${categories}"-->
-<!--                 th:text="${c.getCname()}"-->
-<!--                 th:value="${c.getId()}">-->
-<!--        </option>-->
-<!--      </select>-->
-      <input type="checkbox" name="categories" id="categories"
-             th:each="c : ${categories}"
-             th:text="${c.getCname()}"
-             th:value="${c.getId()}"
-      />
+      <select class="form-control" id="categories" name="categories" required multiple="multiple">
+        <option  th:each="c : ${categories}"
+                 th:text="${c.getCname()}"
+                 th:value="${c.getId()}">
+        </option>
+      </select>
+<!--      <input type="checkbox" name="categories" id="categories"-->
+<!--             th:each="c : ${categories}"-->
+<!--             th:text="${c.getCname()}"-->
+<!--             th:value="${c.getId()}"-->
+<!--      />-->
     </p>
     <p>
       <label for="warehouse">Во магацин</label>
